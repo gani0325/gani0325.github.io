@@ -18,10 +18,10 @@ google_analytics: #UA—XXXXXXXX-X
 disqus_shortname: #disqus shortname
 
 user:
-  name: Catbook
+  name: 알파카징징이
   pic: /assets/img/cat.jpg
-  picAlt: "catbook"
-  job: a category-centric theme
+  picAlt: "알파카징징이"
+  job: 코딩하는 알파카
   aboutme: true # comment this out if you don't need the 'about' page.
 
 exclude:
