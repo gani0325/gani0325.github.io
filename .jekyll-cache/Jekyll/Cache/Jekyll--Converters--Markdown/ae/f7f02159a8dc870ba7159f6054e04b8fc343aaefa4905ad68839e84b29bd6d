@@ -1,0 +1,41 @@
+I"K	<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">코드잇의 자료구조 수업을 참고하여 작성하였습니다</span></p>
+<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">자료구조_컴퓨터가 데이터를 저장하는 법_데이터의 주소</span></p>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>정의</title>
+</head>
+<body>
+
+<pre>
+</pre>
+
+<p><span style="background: linear-gradient(to right, #ffa7a3, #5673bd); padding: 0.43em 1em; font-size: 19px; border-radius: 3px; color: #ffffff;">id 함수</span></p>
+<pre>
+1. id 함수
+id 함수를 이용해 저장한 데이터의 메모리 주소를 정수로 표현된 값 알아냄
+</pre>
+
+</body>
+</html>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">list1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">int1</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">float1</span> <span class="o">=</span> <span class="mf">3.14</span>
+<span class="n">set1</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+<span class="n">tuple1</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+    
+<span class="k">print</span><span class="p">(</span><span class="nb">id</span><span class="p">(</span><span class="n">list1</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">id</span><span class="p">(</span><span class="n">int1</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">id</span><span class="p">(</span><span class="n">float1</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">id</span><span class="p">(</span><span class="n">set1</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">id</span><span class="p">(</span><span class="n">tuple1</span><span class="p">))</span>
+
+<span class="c1"># 1926040931200
+# 1926035368208
+# 1926043862544
+# 1926041215712
+# 1926040872896
+</span></code></pre></div></div>
+:ET
