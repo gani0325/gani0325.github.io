@@ -1,0 +1,79 @@
+I"`<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">혼자공부하는머신러닝+딥러닝 수업을 참고하여 작성하였습니다</span></p>
+<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">2_1_훈련 세트와 테스트 세트</span></p>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>정의</title>
+</head>
+<body>
+
+<pre>
+</pre>
+
+<p><span style="background: linear-gradient(to right, #ffa7a3, #5673bd); padding: 0.43em 1em; font-size: 19px; border-radius: 3px; color: #ffffff;">훈련 세트와 테스트 세트</span></p>
+
+</body>
+</html>
+
+<pre>
+1. 머신러닝
+1) 지도 학습 : 정답(타깃)이 있으니 알고리즘이 정답을 맞히는 것을 학습 (입력, 타깃으로 이뤄짐)
+2) 비지도 학습 : 타깃 없이 입력 데이터만 사용 (데이터 잘 파악, 변형 도움)
+3) 강화 학습 : 타깃이 아니라 알고리즘이 행동한 결과로 얻은 보상을 사용해 학습
+
+2. 지도학습에서의 데이터와 정답
+: 데이터 = 입력 (input) +  정답 = 타깃 (target) = 훈련 데이터
+
+3. 훈련세트와 테스트 세트
+테스트 세트 (test set) : 평가에 사용하는 데이터 
+훈련 세트 (train set) : 훈련에 사용되는 데이터
+</pre>
+
+<p>4. 잘못된 훈련세트와 테스트 세트</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">fish_length</span> <span class="o">=</span> <span class="p">[</span><span class="mi">23</span><span class="p">,</span><span class="mi">34</span><span class="p">,</span><span class="mi">23</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">22</span><span class="p">,</span><span class="mi">33</span><span class="p">,</span><span class="mi">42</span><span class="p">,</span><span class="mi">12</span><span class="p">]</span>
+<span class="n">fish_weight</span> <span class="o">=</span> <span class="p">[</span><span class="mi">242</span><span class="p">,</span><span class="mi">323</span><span class="p">,</span><span class="mi">222</span><span class="p">,</span><span class="mi">333</span><span class="p">,</span><span class="mi">245</span><span class="p">,</span><span class="mi">266</span><span class="p">,</span><span class="mi">234</span><span class="p">,</span><span class="mi">254</span><span class="p">]</span>
+
+<span class="n">fish_data</span> <span class="o">=</span> <span class="p">[[</span><span class="n">l</span><span class="p">,</span><span class="n">w</span><span class="p">]</span> <span class="k">for</span> <span class="n">l</span><span class="p">,</span> <span class="n">w</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">fish_length</span><span class="p">,</span> <span class="n">fish_weight</span><span class="p">)]</span>
+<span class="n">fish_target</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="mi">6</span> <span class="o">+</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">2</span>
+
+<span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">KNeighborsClassifier</span>
+<span class="n">kn</span> <span class="o">=</span> <span class="n">KNeighborsClassifier</span><span class="p">()</span>
+
+<span class="n">train_input</span> <span class="o">=</span> <span class="n">fish_data</span><span class="p">[:</span><span class="mi">6</span><span class="p">]</span>
+<span class="n">train_target</span> <span class="o">=</span> <span class="n">fish_target</span><span class="p">[:</span><span class="mi">6</span><span class="p">]</span>
+<span class="n">test_input</span> <span class="o">=</span> <span class="n">fish_data</span><span class="p">[</span><span class="mi">6</span><span class="p">:]</span>
+<span class="n">test_target</span> <span class="o">=</span> <span class="n">fish_target</span><span class="p">[</span><span class="mi">6</span><span class="p">:]</span>
+
+<span class="n">kn</span> <span class="o">=</span> <span class="n">kn</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_input</span><span class="p">,</span> <span class="n">train_target</span><span class="p">)</span>
+<span class="n">kn</span><span class="p">.</span><span class="n">score</span><span class="p">(</span><span class="n">test_input</span><span class="p">,</span> <span class="n">test_target</span><span class="p">)</span>
+
+<span class="c1"># 0.0
+</span></code></pre></div></div>
+<p><em>샘플링 편향 : 훈련 세트와 테스트 세트에 샘플이 골고루 섞여 있찌 않으면 샘플링이 한쪽으로 치우쳤다</em></p>
+<pred>
+5. 넘파이 numpy
+: 파이썬의 대표적인 배열 라이브러리
+: 고차원의 배열을 손쉽게 만들고 조작할 수 있는 간편한 도구 제공
+: 1차원 배열 - 선, 2차원 배열 - 면, 3차원 배열 - 공간
+</pred>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+
+<span class="n">input_arr</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">(</span><span class="n">fish_data</span><span class="p">)</span>
+<span class="n">target_arr</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">(</span><span class="n">fish_target</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">input_arr</span><span class="p">)</span>
+<span class="c1"># [[ 23 242]
+#  [ 34 323]
+#  [ 23 222]
+#  [ 11 333]
+#  [ 22 245]
+#  [ 33 266]
+#  [ 42 234]
+#  [ 12 254]]
+</span><span class="k">print</span><span class="p">(</span><span class="n">input_arr</span><span class="p">.</span><span class="n">shape</span><span class="p">)</span> <span class="c1"># -&gt; (샘플 수, 특성 수)
+# (8, 2)
+</span></code></pre></div></div>
+:ET

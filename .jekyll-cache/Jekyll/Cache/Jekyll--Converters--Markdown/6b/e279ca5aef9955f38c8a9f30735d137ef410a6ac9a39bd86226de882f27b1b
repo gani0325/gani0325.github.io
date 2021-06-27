@@ -1,0 +1,68 @@
+I"R
+<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">혼자공부하는머신러닝+딥러닝 수업을 참고하여 작성하였습니다</span></p>
+<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">2_1_훈련 세트와 테스트 세트</span></p>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>정의</title>
+</head>
+<body>
+
+<pre>
+</pre>
+
+<p><span style="background: linear-gradient(to right, #ffa7a3, #5673bd); padding: 0.43em 1em; font-size: 19px; border-radius: 3px; color: #ffffff;">훈련 세트와 테스트 세트</span></p>
+<pre>
+1. 머신러닝
+1) 지도 학습 : 정답(타깃)이 있으니 알고리즘이 정답을 맞히는 것을 학습 (입력, 타깃으로 이뤄짐)
+2) 비지도 학습 : 타깃 없이 입력 데이터만 사용 (데이터 잘 파악, 변형 도움)
+3) 강화 학습 : 타깃이 아니라 알고리즘이 행동한 결과로 얻은 보상을 사용해 학습
+
+2. 지도학습에서의 데이터와 정답
+: 데이터 = 입력 (input) +  정답 = 타깃 (target) = 훈련 데이터
+
+3. 훈련세트와 테스트 세트
+테스트 세트 (test set) : 평가에 사용하는 데이터 
+훈련 세트 (train set) : 훈련에 사용되는 데이터
+</pre>
+</body>
+</html>
+<p><span style="background: linear-gradient(to right, #ffa7a3, #5673bd); padding: 0.43em 1em; font-size: 19px; border-radius: 3px; color: #ffffff;">훈련 세트와 테스트 세트</span></p>
+<pre>
+1. 머신러닝
+1) 지도 학습 : 정답(타깃)이 있으니 알고리즘이 정답을 맞히는 것을 학습 (입력, 타깃으로 이뤄짐)
+2) 비지도 학습 : 타깃 없이 입력 데이터만 사용 (데이터 잘 파악, 변형 도움)
+3) 강화 학습 : 타깃이 아니라 알고리즘이 행동한 결과로 얻은 보상을 사용해 학습
+
+2. 지도학습에서의 데이터와 정답
+: 데이터 = 입력 (input) +  정답 = 타깃 (target) = 훈련 데이터
+
+3. 훈련세트와 테스트 세트
+테스트 세트 (test set) : 평가에 사용하는 데이터 
+훈련 세트 (train set) : 훈련에 사용되는 데이터
+
+<p>4. 잘못된 훈련세트와 테스트 세트</p>
+
+```python
+fish_length = [23,34,23,11,22,33,42,12]
+fish_weight = [242,323,222,333,245,266,234,254]
+
+fish_data = [[l,w] for l, w in zip(fish_length, fish_weight)]
+fish_target = [1] * 6 + [0] * 2
+
+from sklearn.neighbors import KNeighborsClassifier
+kn = KNeighborsClassifier()
+
+train_input = fish_data[:6]
+train_target = fish_target[:6]
+test_input = fish_data[6:]
+test_target = fish_target[6:]
+
+kn = kn.fit(train_input, train_target)
+kn.score(test_input, test_target)
+
+# 0.0
+```
+</pre>
+:ET

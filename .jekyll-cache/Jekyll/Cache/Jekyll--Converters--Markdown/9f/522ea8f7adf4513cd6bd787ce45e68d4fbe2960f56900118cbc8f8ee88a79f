@@ -1,0 +1,104 @@
+I"�C<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">혼자공부하는머신러닝+딥러닝 수업을 참고하여 작성하였습니다</span></p>
+<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">2_1_훈련 세트와 테스트 세트</span></p>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>정의</title>
+</head>
+<body>
+
+<pre>
+</pre>
+
+<p><span style="background: linear-gradient(to right, #ffa7a3, #5673bd); padding: 0.43em 1em; font-size: 19px; border-radius: 3px; color: #ffffff;">훈련 세트와 테스트 세트</span></p>
+
+</body>
+</html>
+
+<pre>
+1. 머신러닝
+1) 지도 학습 : 정답(타깃)이 있으니 알고리즘이 정답을 맞히는 것을 학습 (입력, 타깃으로 이뤄짐)
+2) 비지도 학습 : 타깃 없이 입력 데이터만 사용 (데이터 잘 파악, 변형 도움)
+3) 강화 학습 : 타깃이 아니라 알고리즘이 행동한 결과로 얻은 보상을 사용해 학습
+
+2. 지도학습에서의 데이터와 정답
+: 데이터 = 입력 (input) +  정답 = 타깃 (target) = 훈련 데이터
+
+3. 훈련세트와 테스트 세트
+테스트 세트 (test set) : 평가에 사용하는 데이터 
+훈련 세트 (train set) : 훈련에 사용되는 데이터
+</pre>
+
+<p>4. 잘못된 훈련세트와 테스트 세트</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">fish_length</span> <span class="o">=</span> <span class="p">[</span><span class="mi">23</span><span class="p">,</span><span class="mi">34</span><span class="p">,</span><span class="mi">23</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">22</span><span class="p">,</span><span class="mi">33</span><span class="p">,</span><span class="mi">42</span><span class="p">,</span><span class="mi">12</span><span class="p">]</span>
+<span class="n">fish_weight</span> <span class="o">=</span> <span class="p">[</span><span class="mi">242</span><span class="p">,</span><span class="mi">323</span><span class="p">,</span><span class="mi">222</span><span class="p">,</span><span class="mi">333</span><span class="p">,</span><span class="mi">245</span><span class="p">,</span><span class="mi">266</span><span class="p">,</span><span class="mi">234</span><span class="p">,</span><span class="mi">254</span><span class="p">]</span>
+
+<span class="n">fish_data</span> <span class="o">=</span> <span class="p">[[</span><span class="n">l</span><span class="p">,</span><span class="n">w</span><span class="p">]</span> <span class="k">for</span> <span class="n">l</span><span class="p">,</span> <span class="n">w</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">fish_length</span><span class="p">,</span> <span class="n">fish_weight</span><span class="p">)]</span>
+<span class="n">fish_target</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="mi">6</span> <span class="o">+</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">2</span>
+
+<span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">KNeighborsClassifier</span>
+<span class="n">kn</span> <span class="o">=</span> <span class="n">KNeighborsClassifier</span><span class="p">()</span>
+
+<span class="n">train_input</span> <span class="o">=</span> <span class="n">fish_data</span><span class="p">[:</span><span class="mi">6</span><span class="p">]</span>
+<span class="n">train_target</span> <span class="o">=</span> <span class="n">fish_target</span><span class="p">[:</span><span class="mi">6</span><span class="p">]</span>
+<span class="n">test_input</span> <span class="o">=</span> <span class="n">fish_data</span><span class="p">[</span><span class="mi">6</span><span class="p">:]</span>
+<span class="n">test_target</span> <span class="o">=</span> <span class="n">fish_target</span><span class="p">[</span><span class="mi">6</span><span class="p">:]</span>
+
+<span class="n">kn</span> <span class="o">=</span> <span class="n">kn</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_input</span><span class="p">,</span> <span class="n">train_target</span><span class="p">)</span>
+<span class="n">kn</span><span class="p">.</span><span class="n">score</span><span class="p">(</span><span class="n">test_input</span><span class="p">,</span> <span class="n">test_target</span><span class="p">)</span>
+
+<span class="c1"># 0.0
+</span></code></pre></div></div>
+<p><em>샘플링 편향 : 훈련 세트와 테스트 세트에 샘플이 골고루 섞여 있찌 않으면 샘플링이 한쪽으로 치우쳤다</em></p>
+
+<p>5. 넘파이 numpy</p>
+<p>: 파이썬의 대표적인 배열 라이브러리</p>
+<p>: 고차원의 배열을 손쉽게 만들고 조작할 수 있는 간편한 도구 제공</p>
+<p>: 1차원 배열 - 선, 2차원 배열 - 면, 3차원 배열 - 공간</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+
+<span class="n">input_arr</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">(</span><span class="n">fish_data</span><span class="p">)</span>
+<span class="n">target_arr</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">(</span><span class="n">fish_target</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">input_arr</span><span class="p">)</span>
+<span class="c1"># [[ 23 242]
+#  [ 34 323]
+#  [ 23 222]
+#  [ 11 333]
+#  [ 22 245]
+#  [ 33 266]
+#  [ 42 234]
+#  [ 12 254]]
+</span><span class="k">print</span><span class="p">(</span><span class="n">input_arr</span><span class="p">.</span><span class="n">shape</span><span class="p">)</span> <span class="c1"># -&gt; (샘플 수, 특성 수)
+# (8, 2)
+</span></code></pre></div></div>
+<p>- arange() : 0에서부터 n까지 1 증가하는 인덱스 만들기</p>
+<p>- random seed() : 무작위 결과 만들기</p>
+<p>- shuffle() : 주어진 배열을 무작위로 섞기</p>
+<p>- 배열 인덱싱 : 여러 개의 인덱스로 한 번에 여러 개의 원소 선택</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">index</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+<span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+
+<span class="c1"># [1 5 0 7 2 4 3 6]
+</span>
+<span class="n">train_input</span> <span class="o">=</span> <span class="n">input_arr</span><span class="p">[</span><span class="n">index</span><span class="p">[:</span><span class="mi">6</span><span class="p">]]</span>
+<span class="n">train_target</span> <span class="o">=</span> <span class="n">target_arr</span><span class="p">[</span><span class="n">index</span><span class="p">[:</span><span class="mi">6</span><span class="p">]]</span>
+<span class="n">test_input</span> <span class="o">=</span> <span class="n">input_arr</span><span class="p">[</span><span class="n">index</span><span class="p">[</span><span class="mi">6</span><span class="p">:]]</span>
+<span class="n">test_target</span> <span class="o">=</span> <span class="n">target_arr</span><span class="p">[</span><span class="n">index</span><span class="p">[</span><span class="mi">6</span><span class="p">:]]</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+
+<span class="n">plt</span><span class="p">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">train_input</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">train_input</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">test_input</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">test_input</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="n">plt</span><span class="p">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">'length'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">'weight'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div></div>
+<p>&lt;img src = “data:image/png;base64,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”alt = “도미, 빙어 shuffle그래프”&gt;</p>
+:ET
