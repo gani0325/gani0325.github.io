@@ -1,0 +1,85 @@
+I"�<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">혼자공부하는머신러닝+딥러닝 수업을 참고하여 작성하였습니다</span></p>
+<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">3_2_사이킷런으로 선형회귀모델 만들어보기</span></p>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>정의</title>
+</head>
+<body>
+
+<pre>
+</pre>
+
+<p><span style="background: linear-gradient(to right, #ffa7a3, #5673bd); padding: 0.43em 1em; font-size: 19px; border-radius: 3px; color: #ffffff;">사이킷런으로 선형회귀모델 만들어보기</span></p>
+<pre>
+1. 농어의 무게를 예측하라
+</pre>
+</body>
+</html>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">perch_length</span> <span class="o">=</span> <span class="p">[</span><span class="mi">23</span><span class="p">,</span><span class="mi">34</span><span class="p">,</span><span class="mi">23</span><span class="p">,</span><span class="mi">27</span><span class="p">,</span><span class="mi">22</span><span class="p">,</span><span class="mi">33</span><span class="p">,</span><span class="mi">42</span><span class="p">,</span><span class="mi">28</span><span class="p">,</span><span class="mi">45</span><span class="p">,</span><span class="mi">34</span><span class="p">,</span><span class="mi">23</span><span class="p">,</span><span class="mi">38</span><span class="p">]</span>
+<span class="n">perch_weight</span> <span class="o">=</span> <span class="p">[</span><span class="mi">242</span><span class="p">,</span><span class="mi">323</span><span class="p">,</span><span class="mi">265</span><span class="p">,</span><span class="mi">284</span><span class="p">,</span><span class="mi">226</span><span class="p">,</span><span class="mi">338</span><span class="p">,</span><span class="mi">466</span><span class="p">,</span><span class="mi">284</span><span class="p">,</span><span class="mi">477</span><span class="p">,</span><span class="mi">385</span><span class="p">,</span><span class="mi">238</span><span class="p">,</span><span class="mi">409</span><span class="p">]</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+
+<span class="n">plt</span><span class="p">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">perch_length</span><span class="p">,</span> <span class="n">perch_weight</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">'length'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">'weight'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div></div>
+
+<body>
+<pre>
+2. 훈련 세트 준비
+</pre>
+</body>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="n">perch_length</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">(</span><span class="n">perch_length</span><span class="p">)</span>
+<span class="n">perch_weight</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">(</span><span class="n">perch_weight</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="n">train_input</span><span class="p">,</span> <span class="n">test_input</span><span class="p">,</span> <span class="n">train_target</span><span class="p">,</span> <span class="n">test_target</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">perch_length</span><span class="p">,</span> <span class="n">perch_weight</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="n">train_input</span> <span class="o">=</span> <span class="n">train_input</span><span class="p">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">test_input</span> <span class="o">=</span> <span class="n">test_input</span><span class="p">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div></div>
+<body>
+<pre>
+3. 회귀 모델 훈련
+- 과소적합
+- 과대적합
+</pre>
+</body>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">KNeighborsRegressor</span>
+
+<span class="n">knr</span> <span class="o">=</span> <span class="n">KNeighborsRegressor</span><span class="p">()</span>
+<span class="n">knr</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_input</span><span class="p">,</span> <span class="n">train_target</span><span class="p">)</span>
+<span class="n">knr</span><span class="p">.</span><span class="n">score</span><span class="p">(</span><span class="n">test_input</span><span class="p">,</span> <span class="n">test_target</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_absolute_error</span>
+
+<span class="n">test_prediction</span> <span class="o">=</span> <span class="n">knr</span><span class="p">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test_input</span><span class="p">)</span>
+<span class="n">mae</span> <span class="o">=</span> <span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">test_target</span><span class="p">,</span> <span class="n">test_prediction</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">mae</span><span class="p">)</span>
+</code></pre></div></div>
+
+<body>
+<pre>
+4. 이웃 개수 줄이기
+- k 높을수록 과소적합
+- k 낮을수록 과대적합
+</pre>
+</body>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">knr</span><span class="p">.</span><span class="n">n_neighbors</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">knr</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_input</span><span class="p">,</span> <span class="n">train_target</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">knr</span><span class="p">.</span><span class="n">score</span><span class="p">(</span><span class="n">train_input</span><span class="p">,</span> <span class="n">train_target</span><span class="p">))</span>
+<span class="c1"># 0.938709599713688
+</span><span class="k">print</span><span class="p">(</span><span class="n">knr</span><span class="p">.</span><span class="n">score</span><span class="p">(</span><span class="n">test_input</span><span class="p">,</span> <span class="n">test_target</span><span class="p">))</span>
+<span class="c1"># 0.8942577363692543
+</span></code></pre></div></div>
+:ET

@@ -1,0 +1,28 @@
+I"�<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">KAIST 산업및시스템공학과 문일철_ 데이터 구조 및 분석 수업을 참고하여 작성하였습니다</span></p>
+<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">ch_1_1 Programming and Execution Environment</span></p>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>정의</title>
+</head>
+<body>
+
+<pre>
+</pre>
+
+<p><span style="background: linear-gradient(to right, #ffa7a3, #5673bd); padding: 0.43em 1em; font-size: 19px; border-radius: 3px; color: #ffffff;">Programming and Execution Environment</span></p>
+<pre>
+1. python
+- interpreter(바로 실행 가능) &lt;-&gt; compiler
+- object-oriented
+- Dynamic type of variables (구성의 용이성)
+- increasing usage by industry and academina
+- Unique code structure
+- Fast development speed, slow execution speed
+- specialty in data analyscs
+
+</pre>
+</body>
+</html>
+:ET

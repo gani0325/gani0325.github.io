@@ -1,0 +1,47 @@
+I"|<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">혼자 공부하는 C언어 수업을 참고하여 작성하였습니다</span></p>
+<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">1_2_컴파일과 컴파일러 사용법</span></p>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>정의</title>
+</head>
+<body>
+
+<pre>
+</pre>
+
+<p><span style="background: linear-gradient(to right, #ffa7a3, #5673bd); padding: 0.43em 1em; font-size: 19px; border-radius: 3px; color: #ffffff;">컴파일과 컴파일러 사용법</span></p>
+<pre>
+1. 프로그램 만드는 과정
+1) 소스 파일(Source file) 만들기
+: C언어로 작성한 문서
+: 아스키 코드값으로 저장된 텍스트 파일
+2) 컴파일 (Complie)
+: 소스파일을 컴퓨터가 이해하는 언어, 기계어로 바꾸는 과정
+- 디버깅(debugging) : 에러를 수정하는 것
+</pre>
+</body>
+</html>
+
+<ul>
+  <li>컴파일 과정
+1단계 전처리 : 소스파일 가공 (#include)
+2단계 컴파일 : 전처리가 끝난 파일을 컴파일 하면 개체파일이 된다 (CPU가 해석할 수 있는 명령어들로 이루어진 기계어 파일)
+3단계 링크 : 개체파일에 startup code를 결합하는 과정을 수행하는 과정 (main 함수 코드 실행))</li>
+</ul>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// #include -&gt; 지정한 파일을 추가하는 지시자</span>
+<span class="cp">#include &lt;stdio.h&gt;  
+#include &lt;stdlib.h&gt;
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"Be happy!"</span><span class="p">);</span>
+    <span class="n">systme</span><span class="p">(</span><span class="s">"pause"</span><span class="p">);</span>
+<span class="c1">// system -&gt; 시스템 명령을 수행하는 함수</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+</code></pre></div></div>
+:ET

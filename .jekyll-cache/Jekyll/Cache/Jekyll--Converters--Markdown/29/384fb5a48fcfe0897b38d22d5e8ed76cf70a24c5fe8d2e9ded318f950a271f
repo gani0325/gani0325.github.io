@@ -1,0 +1,85 @@
+I"�:<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">혼자공부하는머신러닝+딥러닝 수업을 참고하여 작성하였습니다</span></p>
+<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">3_1_k-최근접 이웃 회귀</span></p>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>정의</title>
+</head>
+<body>
+
+<pre>
+</pre>
+
+<p><span style="background: linear-gradient(to right, #ffa7a3, #5673bd); padding: 0.43em 1em; font-size: 19px; border-radius: 3px; color: #ffffff;">k-최근접 이웃 회귀</span></p>
+<pre>
+1. 농어의 무게를 예측하라
+</pre>
+</body>
+</html>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">perch_length</span> <span class="o">=</span> <span class="p">[</span><span class="mi">23</span><span class="p">,</span><span class="mi">34</span><span class="p">,</span><span class="mi">23</span><span class="p">,</span><span class="mi">27</span><span class="p">,</span><span class="mi">22</span><span class="p">,</span><span class="mi">33</span><span class="p">,</span><span class="mi">42</span><span class="p">,</span><span class="mi">28</span><span class="p">,</span><span class="mi">45</span><span class="p">,</span><span class="mi">34</span><span class="p">,</span><span class="mi">23</span><span class="p">,</span><span class="mi">38</span><span class="p">]</span>
+<span class="n">perch_weight</span> <span class="o">=</span> <span class="p">[</span><span class="mi">242</span><span class="p">,</span><span class="mi">323</span><span class="p">,</span><span class="mi">265</span><span class="p">,</span><span class="mi">284</span><span class="p">,</span><span class="mi">226</span><span class="p">,</span><span class="mi">338</span><span class="p">,</span><span class="mi">466</span><span class="p">,</span><span class="mi">284</span><span class="p">,</span><span class="mi">477</span><span class="p">,</span><span class="mi">385</span><span class="p">,</span><span class="mi">238</span><span class="p">,</span><span class="mi">409</span><span class="p">]</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+
+<span class="n">plt</span><span class="p">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">perch_length</span><span class="p">,</span> <span class="n">perch_weight</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">'length'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">'weight'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div></div>
+<p><img src="data:image/png;base64,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" alt="농어 길이, 무게" /></p>
+<body>
+<pre>
+2. 훈련 세트 준비
+</pre>
+</body>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="n">perch_length</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">(</span><span class="n">perch_length</span><span class="p">)</span>
+<span class="n">perch_weight</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">(</span><span class="n">perch_weight</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="n">train_input</span><span class="p">,</span> <span class="n">test_input</span><span class="p">,</span> <span class="n">train_target</span><span class="p">,</span> <span class="n">test_target</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">perch_length</span><span class="p">,</span> <span class="n">perch_weight</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="n">train_input</span> <span class="o">=</span> <span class="n">train_input</span><span class="p">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">test_input</span> <span class="o">=</span> <span class="n">test_input</span><span class="p">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div></div>
+<body>
+<pre>
+3. 회귀 모델 훈련
+- 과소적합
+- 과대적합
+</pre>
+</body>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">KNeighborsRegressor</span>
+
+<span class="n">knr</span> <span class="o">=</span> <span class="n">KNeighborsRegressor</span><span class="p">()</span>
+<span class="n">knr</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_input</span><span class="p">,</span> <span class="n">train_target</span><span class="p">)</span>
+<span class="n">knr</span><span class="p">.</span><span class="n">score</span><span class="p">(</span><span class="n">test_input</span><span class="p">,</span> <span class="n">test_target</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_absolute_error</span>
+
+<span class="n">test_prediction</span> <span class="o">=</span> <span class="n">knr</span><span class="p">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test_input</span><span class="p">)</span>
+<span class="n">mae</span> <span class="o">=</span> <span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">test_target</span><span class="p">,</span> <span class="n">test_prediction</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">mae</span><span class="p">)</span>
+</code></pre></div></div>
+
+<body>
+<pre>
+4. 이웃 개수 줄이기
+- k 높을수록 과소적합
+- k 낮을수록 과대적합
+</pre>
+</body>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">knr</span><span class="p">.</span><span class="n">n_neighbors</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">knr</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_input</span><span class="p">,</span> <span class="n">train_target</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">knr</span><span class="p">.</span><span class="n">score</span><span class="p">(</span><span class="n">train_input</span><span class="p">,</span> <span class="n">train_target</span><span class="p">))</span>
+<span class="c1"># 0.938709599713688
+</span><span class="k">print</span><span class="p">(</span><span class="n">knr</span><span class="p">.</span><span class="n">score</span><span class="p">(</span><span class="n">test_input</span><span class="p">,</span> <span class="n">test_target</span><span class="p">))</span>
+<span class="c1"># 0.8942577363692543
+</span></code></pre></div></div>
+:ET

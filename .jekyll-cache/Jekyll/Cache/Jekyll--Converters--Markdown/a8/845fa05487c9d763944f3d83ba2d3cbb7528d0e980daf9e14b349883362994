@@ -1,0 +1,41 @@
+I"�<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">혼자 공부하는 C언어 수업을 참고하여 작성하였습니다</span></p>
+<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">2_2_상수와 데이터 표현 방법</span></p>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>정의</title>
+</head>
+<body>
+
+<pre>
+</pre>
+
+<p><span style="background: linear-gradient(to right, #ffa7a3, #5673bd); padding: 0.43em 1em; font-size: 19px; border-radius: 3px; color: #ffffff;">상수와 데이터 표현 방법</span></p>
+<pre>
+1. 실수형 상수
+: 실수는 오차가 있다
+: +104.2, -3, 20.4
+: 소수점, 지수법
+2. 문자 상수
+: 'A'
+3. 문자열 상수
+: "APPLE"
+
+4. 정수
+: 2(0xb) bin , 8(0xo) oct, 10(int), 16진법(0xh) hex
+: 정수-&gt;2진수 (4 byte = 32 bit)
+: 10 -&gt; 0000\1010
+        MSB \ LSB
+: -10 -&gt; 2의 보수로 저장
+        11110101 + 1
+      -&gt; 1111\0110
+
+
+
+</pre>
+
+</body>
+</html>
+
+:ET
