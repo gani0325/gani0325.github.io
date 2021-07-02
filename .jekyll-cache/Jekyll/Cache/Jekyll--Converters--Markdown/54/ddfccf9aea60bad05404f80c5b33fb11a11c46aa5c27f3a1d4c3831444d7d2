@@ -1,0 +1,45 @@
+I"�<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">KAIST 산업및시스템공학과 문일철_ 데이터 구조 및 분석 수업을 참고하여 작성하였습니다</span></p>
+<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">ch_1_5 String</span></p>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>정의</title>
+</head>
+<body>
+
+<pre>
+</pre>
+
+<p><span style="background: linear-gradient(to right, #ffa7a3, #5673bd); padding: 0.43em 1em; font-size: 19px; border-radius: 3px; color: #ffffff;">String</span></p>
+<pre>
+1. String
+: 문자열, 문자가 연속으로 이루어짐
+</pre>
+</body>
+</html>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">strTest</span> <span class="o">=</span> <span class="s">"Hello world' gani"</span>   <span class="c1"># -&gt; string variable statements both of ' amd "
+</span><span class="k">print</span><span class="p">(</span><span class="n">strTest</span><span class="p">)</span>
+<span class="n">strTestComp</span> <span class="o">=</span> <span class="s">"Hello world' gani"</span>
+<span class="k">print</span><span class="p">(</span><span class="n">strTestComp</span><span class="p">,</span> <span class="n">strTest</span> <span class="o">==</span> <span class="n">strTestComp</span><span class="p">)</span>      <span class="c1"># -&gt; string value equivalence test
+</span><span class="k">print</span><span class="p">(</span><span class="n">strTest</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">strTest</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">strTest</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">strTest</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span>
+<span class="c1"># -&gt; string variable is actually a linear collection of letters (that have indexes)
+</span><span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">strTest</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">strTest</span> <span class="o">+</span> <span class="s">" "</span> <span class="o">+</span> <span class="s">"Dept"</span><span class="p">)</span>       <span class="c1"># -&gt; how the string operators work!
+</span><span class="k">print</span><span class="p">(</span><span class="n">strTest</span><span class="o">*</span><span class="mi">2</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"gani"</span> <span class="ow">in</span> <span class="n">strTest</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"gani"</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">strTest</span><span class="p">)</span>
+
+<span class="c1"># Hello world' gani
+# Hello world' gani True
+# H e
+# i n
+# 17
+# Hello world' gani Dept
+# Hello world' ganiHello world' gani
+# True
+# False
+</span></code></pre></div></div>
+:ET

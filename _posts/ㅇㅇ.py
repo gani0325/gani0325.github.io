@@ -1,16 +1,20 @@
-
-class HelloWorld :
-    def __init__(self) :
-        print("Helllo world! just one more time! ")
-    def __del__(self) :
-        print("Good bye!")
-    def performAverage(self, val1, val2) :
-        average = (val1 + val2) /2.0
-        print("The average of the scores is : ", average)
-
 def main() :
-    world = HelloWorld()
-    score1, score2 = map(int, input("Enter the scores : ").split())
-    world.performAverage(score1, score2)
+    numYearBase10 = 2021
+    numYearBase8 = 3733
+    numYearBase16 = 0x7DB
 
-main()
+    print("Year by base 10 : %d, by base 8: %d, by base 16 : %d"%(numYearBase10, numYearBase8, numYearBase16))
+    numComplex1 = complex(3, 4)
+    numComplex2 = 4+3j
+
+    print("Complex value : ", numComplex1)
+    print("Absolute value : ", abs(numComplex2))
+    print("Real value : ", numComplex2.real)
+    print("Image value : ", numComplex2.imag)
+
+    strDeptName = ("Industrial & System Engineering")
+    strUnivName = ("KAIST")
+    print("Department : ", strDeptName)
+    print("Full name of dept : ", strDeptName, ", ", strUnivName)
+
+main()    

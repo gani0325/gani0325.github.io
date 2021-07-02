@@ -1,0 +1,109 @@
+I"'"<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">KAIST 산업및시스템공학과 문일철_ 데이터 구조 및 분석 수업을 참고하여 작성하였습니다</span></p>
+<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">ch_1_4 Variable Statements and Operators</span></p>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>정의</title>
+</head>
+<body>
+
+<pre>
+</pre>
+
+<p><span style="background: linear-gradient(to right, #ffa7a3, #5673bd); padding: 0.43em 1em; font-size: 19px; border-radius: 3px; color: #ffffff;">Variable Statements and Operators</span></p>
+<pre>
+1. Data Types
+1) Numeric Data Type
+- integer : signed interger, 32bit
+- float : 64 bit double precision. like 1.23
+- long integer : Large integer like 1.2333 L
+- octal integer : base-8 integer
+- hexadecimal integer : base-16 integer
+
+2) String Data Type
+- character string : ordered collection of characters
+
+3) Collection Data Type
+- list : ordered collection of object
+- dictionary : collection of associated key data pairs
+- tuple : similar to list
+
+2. Variable Statements
+</pre>
+</body>
+</html>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">main</span><span class="p">()</span> <span class="p">:</span>
+    <span class="n">numYearBase10</span> <span class="o">=</span> <span class="mi">2021</span>
+    <span class="n">numYearBase8</span> <span class="o">=</span> <span class="mo">0o3745</span>
+    <span class="n">numYearBase16</span> <span class="o">=</span> <span class="mh">0x7e5</span>
+    <span class="c1"># -&gt; integer in decimal, octal, hexadecimal
+</span>    <span class="k">print</span><span class="p">(</span><span class="s">"Year by base 10 : %d, by base 8: %d, by base 16 : %d"</span><span class="o">%</span><span class="p">(</span><span class="n">numYearBase10</span><span class="p">,</span> <span class="n">numYearBase8</span><span class="p">,</span> <span class="n">numYearBase16</span><span class="p">))</span>
+
+    <span class="n">numComplex1</span> <span class="o">=</span> <span class="nb">complex</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>     <span class="c1"># -&gt; complex number
+</span>    <span class="n">numComplex2</span> <span class="o">=</span> <span class="mi">4</span><span class="o">+</span><span class="mf">3j</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="s">"Complex value : "</span><span class="p">,</span> <span class="n">numComplex1</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"Absolute value : "</span><span class="p">,</span> <span class="nb">abs</span><span class="p">(</span><span class="n">numComplex2</span><span class="p">))</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"Real value : "</span><span class="p">,</span> <span class="n">numComplex2</span><span class="p">.</span><span class="n">real</span><span class="p">)</span>    <span class="c1"># -&gt; 실수
+</span>    <span class="k">print</span><span class="p">(</span><span class="s">"Image value : "</span><span class="p">,</span> <span class="n">numComplex2</span><span class="p">.</span><span class="n">imag</span><span class="p">)</span>   <span class="c1"># -&gt; 허수
+</span>
+    <span class="n">strDeptName</span> <span class="o">=</span> <span class="p">(</span><span class="s">"Industrial &amp; System Engineering"</span><span class="p">)</span>
+    <span class="n">strUnivName</span> <span class="o">=</span> <span class="p">(</span><span class="s">"KAIST"</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"Department : "</span><span class="p">,</span> <span class="n">strDeptName</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"Full name of dept : "</span><span class="p">,</span> <span class="n">strDeptName</span><span class="p">,</span> <span class="s">", "</span><span class="p">,</span> <span class="n">strUnivName</span><span class="p">)</span>
+
+<span class="n">main</span><span class="p">()</span>
+
+<span class="c1"># Year by base 10 : 2021, by base 8: 2021, by base 16 : 2021
+# Complex value :  (3+4j)
+# Absolute value :  5.0
+# Real value :  4.0
+# Image value :  3.0
+# Department :  Industrial &amp; System Engineering
+# Full name of dept :  Industrial &amp; System Engineering ,  KAIST
+</span></code></pre></div></div>
+
+<body>
+<pre>
+3. Operator
+</pre>
+</body>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">main</span><span class="p">()</span> <span class="p">:</span>
+    <span class="n">numTest1</span> <span class="o">=</span> <span class="mi">10</span>
+    <span class="n">numTest2</span> <span class="o">=</span> <span class="mf">3.0</span>
+    <span class="n">numPlus</span> <span class="o">=</span> <span class="n">numTest1</span> <span class="o">+</span> <span class="n">numTest2</span>
+    <span class="n">numMinus</span> <span class="o">=</span> <span class="n">numTest1</span> <span class="o">-</span> <span class="n">numTest2</span>
+    <span class="n">numMultiply</span> <span class="o">=</span> <span class="n">numTest1</span> <span class="o">*</span> <span class="n">numTest2</span>
+    <span class="n">numDivide</span> <span class="o">=</span> <span class="n">numTest1</span> <span class="o">/</span> <span class="n">numTest2</span>
+    <span class="n">numModula</span> <span class="o">=</span> <span class="n">numTest1</span> <span class="o">%</span> <span class="n">numTest2</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"%d, %d, %d, %f, %d"</span> <span class="o">%</span><span class="p">(</span><span class="n">numPlus</span><span class="p">,</span> <span class="n">numMinus</span><span class="p">,</span> <span class="n">numMultiply</span><span class="p">,</span> <span class="n">numDivide</span><span class="p">,</span> <span class="n">numModula</span><span class="p">))</span>
+    <span class="c1"># -&gt; +, -, *, /, % (modulo operator)
+</span>    <span class="n">numDivideInt</span> <span class="o">=</span> <span class="n">numTest1</span> <span class="o">/</span><span class="nb">int</span><span class="p">(</span><span class="n">numTest2</span><span class="p">)</span>      <span class="c1"># -&gt; how to int, type casting
+</span>    <span class="k">print</span><span class="p">(</span><span class="n">numDivide</span><span class="p">,</span> <span class="n">numDivideInt</span><span class="p">)</span>
+
+    <span class="n">numTest2</span><span class="p">,</span> <span class="n">numTest1</span> <span class="o">=</span> <span class="n">numTest1</span><span class="p">,</span> <span class="n">numTest2</span>     <span class="c1"># -&gt; swapping statement
+</span>    <span class="k">print</span><span class="p">(</span><span class="n">numTest1</span><span class="p">,</span> <span class="n">numTest2</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">numTest1</span> <span class="o">==</span> <span class="n">numTest2</span><span class="p">)</span>     <span class="c1"># == equivalence
+</span>    <span class="k">print</span><span class="p">(</span><span class="n">numTest1</span> <span class="o">!=</span> <span class="n">numTest2</span><span class="p">)</span>     <span class="c1"># != in-equivalence
+</span>    <span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">numTest1</span><span class="p">))</span>
+
+    <span class="n">numTest1</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">numTest1</span><span class="p">)</span>    <span class="c1"># -&gt; how to str, type casting
+</span>    <span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">numTest1</span><span class="p">),</span> <span class="n">numTest1</span><span class="p">)</span>
+
+    <span class="n">strFormula</span> <span class="o">=</span> <span class="s">"2021 / 100"</span>
+    <span class="k">print</span><span class="p">(</span><span class="nb">eval</span><span class="p">(</span><span class="n">strFormula</span><span class="p">))</span>
+<span class="n">main</span><span class="p">()</span>
+
+<span class="c1"># 13, 7, 30, 3.333333, 1
+# 3.3333333333333335 3.3333333333333335
+# 3.0 10
+# False
+# True
+# &lt;class 'float'&gt;
+# &lt;class 'str'&gt; 3.0
+# 20.21
+</span></code></pre></div></div>
+:ET

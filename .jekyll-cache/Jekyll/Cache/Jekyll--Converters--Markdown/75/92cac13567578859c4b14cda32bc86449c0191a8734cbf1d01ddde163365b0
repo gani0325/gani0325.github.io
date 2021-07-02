@@ -1,5 +1,5 @@
-I"B<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">KAIST 산업및시스템공학과 문일철_ 데이터 구조 및 분석 수업을 참고하여 작성하였습니다</span></p>
-<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">ch_1_3 Naming, Styling and Comments</span></p>
+I"6<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">KAIST 산업및시스템공학과 문일철_ 데이터 구조 및 분석 수업을 참고하여 작성하였습니다</span></p>
+<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">ch_1_4 Variable Statements and Operators</span></p>
 
 <html lang="en">
 <head>
@@ -11,41 +11,38 @@
 <pre>
 </pre>
 
-<p><span style="background: linear-gradient(to right, #ffa7a3, #5673bd); padding: 0.43em 1em; font-size: 19px; border-radius: 3px; color: #ffffff;">Naming, Styling and Comments</span></p>
+<p><span style="background: linear-gradient(to right, #ffa7a3, #5673bd); padding: 0.43em 1em; font-size: 19px; border-radius: 3px; color: #ffffff;">Variable Statements and Operators</span></p>
 <pre>
-1. Naming, Styling and Comments
-- Naming : Use names clearly conveying the meaning (의미를 잘 전달)
-    # 1 class camel casing
-    1) Class name
-    - 명사 위주로
-    - Capitalize the first letter 
-    ex) HelloWorld
+1. Data Types
+1) Numeric Data Type
+- integer : signed interger, 32bit
+- float : 64 bit double precision. like 1.23
+- long integer : Large integer like 1.2333 L
+- octal integer : base-8 integer
+- hexadecimal integer : base-16 integer
 
-    2) Variable name
-    - contents to be stored
-    - start with lower case
-    - acceptable (but python X)
-    ex) numberOfStudents = 100
-        intCount = 0
+2) String Data Type
+- character string : ordered collection of characters
 
-    3) Method name
-    - Verb for the method action (움직이는거라 동사로 명)
-    - start with lower case
-    ex) def performAverage(self, val1, val2)
+3) Collection Data Type
+- list : ordered collection of object
+- dictionary : collection of associated key data pairs
+- tuple : similar to list
 
-2. Indentation
-: 4 spaces per each level (4칸 들여쓰기)
+2. Variable Statements
 
-3. Comments
-- block 주석 ``` ~~~ ``` or """ ~~~ """ : beginning and ending of multiline comments
-- # 주석 : beginning of single-line comments
+
+
+
+
+
+
 
 </pre>
 </body>
 </html>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-<span class="s">"""
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">"""
 징징이는 공부를 해요
 징징이는 놀고 싶어요
 징징이는 떡볶이를 좋아해요
