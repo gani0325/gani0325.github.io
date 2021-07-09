@@ -1,0 +1,145 @@
+I"�.<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">KAIST 산업및시스템공학과 문일철_ 데이터 구조 및 분석 수업을 참고하여 작성하였습니다</span></p>
+<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">ch_1_6 List, Tuple, Dictionary
+</span></p>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>정의</title>
+</head>
+<body>
+
+<pre>
+</pre>
+
+<p><span style="background: linear-gradient(to right, #ffa7a3, #5673bd); padding: 0.43em 1em; font-size: 19px; border-radius: 3px; color: #ffffff;">List, Tuple, Dictionary
+</span></p>
+<pre>
+1. Index in Sequence
+: index applies to strings as well as tuples, lists
+-&gt; Applies to any sequence variables
+</pre>
+</body>
+</html>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">strTest</span> <span class="o">=</span> <span class="s">"Hello World's gani"</span>
+<span class="k">print</span><span class="p">(</span><span class="n">strTest</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">strTest</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">strTest</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">strTest</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>   <span class="c1"># -&gt; sequence, or any array
+</span><span class="k">print</span><span class="p">(</span><span class="n">strTest</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">])</span>     <span class="c1"># -&gt; x:y from x to y
+</span><span class="k">print</span><span class="p">(</span><span class="n">strTest</span><span class="p">[</span><span class="mi">3</span><span class="p">:])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">strTest</span><span class="p">[:</span><span class="mi">3</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">strTest</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">9</span><span class="p">:</span><span class="mi">2</span><span class="p">])</span>   <span class="c1"># -&gt; x:y:z from x to y with z steps
+</span><span class="k">print</span><span class="p">(</span><span class="n">strTest</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">strTest</span><span class="p">):</span><span class="mi">2</span><span class="p">])</span>    <span class="c1"># -&gt; len 길이
+</span><span class="k">print</span><span class="p">(</span><span class="n">strTest</span><span class="p">[</span><span class="mi">1</span><span class="p">::</span><span class="mi">2</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">strTest</span><span class="p">[</span><span class="mi">5</span><span class="p">::</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>   <span class="c1">#default y = length of sequence, z = 1
+</span>
+<span class="c1"># Hello World's gani
+# e l l
+# el
+# lo World's gani
+# Hel
+# el o
+# el ol' ai
+# el ol' ai
+#  olleH
+</span></code></pre></div></div>
+<body>
+<pre>
+2. List
+: list is another type of sequence variables
+: 무엇이든 다 저장된다
+</pre>
+</body>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">lstTest</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">lstTest</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">lstTest</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">lstTest</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">lstTest</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">lstTest</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">lstTest</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">lstTest</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">lstTest</span> <span class="o">+</span> <span class="n">lstTest</span><span class="p">)</span>        <span class="c1"># -&gt; how the operator work
+</span><span class="k">print</span><span class="p">(</span><span class="n">lstTest</span><span class="o">*</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="n">lstTest</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>     <span class="c1"># -&gt; range(x,y,z) == x:y:z
+</span><span class="k">print</span><span class="p">(</span><span class="n">lstTest</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span> <span class="mi">4</span> <span class="ow">in</span> <span class="n">lstTest</span><span class="p">,</span> <span class="mi">100</span> <span class="ow">in</span> <span class="n">lstTest</span><span class="p">)</span>    <span class="c1"># in and not in comes pretty handy
+</span><span class="n">lstTest</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s">'hey'</span><span class="p">)</span>
+<span class="k">del</span> <span class="n">lstTest</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">lstTest</span><span class="p">)</span>
+<span class="n">lstTest</span><span class="p">.</span><span class="n">reverse</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">lstTest</span><span class="p">)</span>
+<span class="n">lstTest</span><span class="p">.</span><span class="n">remove</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">lstTest</span><span class="p">)</span>
+<span class="n">lstTest</span><span class="p">.</span><span class="n">sort</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">lstTest</span><span class="p">)</span>
+
+<span class="c1"># [1, 2, 3, 4]
+# 1 2 3
+# 4 3
+# [2, 3]
+# [1, 2, 3, 4, 1, 2, 3, 4]
+# [1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4]
+# [1, 4, 7, 10, 13, 16, 19]
+# True False
+# [4, 7, 10, 13, 16, 19, 'hey']
+# ['hey', 19, 16, 13, 10, 7, 4]
+# ['hey', 19, 16, 13, 10, 7]
+</span></code></pre></div></div>
+<body>
+<pre>
+3. Tuple
+: tuple and list are almost alike
+: only different in changing values
+(tuple does not allow value changes)
+</pre>
+</body>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">tplTest</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">tplTest</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">tplTest</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">tplTest</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">tplTest</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">tplTest</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">tplTest</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">tplTest</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">tplTest</span> <span class="o">+</span> <span class="n">tplTest</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">tplTest</span> <span class="o">*</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">tplTest</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">300</span>
+
+<span class="c1"># (1, 2, 3)
+# 1 2 3
+# 3 2
+# (2, 3)
+# (1, 2, 3, 1, 2, 3)
+# (1, 2, 3, 1, 2, 3, 1, 2, 3)
+# Traceback (most recent call last):
+#   File "C:/Users/82106/PycharmProjects/계산기/main.py", line 43, in &lt;module&gt;
+#     tplTest[0] = 300
+# TypeError: 'tuple' object does not support item assignment
+</span></code></pre></div></div>
+
+<body>
+<pre>
+4. Dictionary
+: dictionary is also a collection variable type
+: It is not sequential (선형적 X)(연속적 X)
+: works by a pair of keys and values
+: set of (key1, value1)
+: Exact syntax {key1:value1}
+</pre>
+</body>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dicTest</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span><span class="s">'one'</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span><span class="s">'two'</span><span class="p">,</span><span class="mi">3</span> <span class="p">:</span> <span class="s">'three'</span><span class="p">}</span>
+<span class="k">print</span><span class="p">(</span><span class="n">dicTest</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">dicTest</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="s">'four'</span>     <span class="c1"># -&gt; 4: 'four'
+</span><span class="k">print</span><span class="p">(</span><span class="n">dicTest</span><span class="p">)</span>
+<span class="n">dicTest</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="s">'hana'</span>
+<span class="k">print</span><span class="p">(</span><span class="n">dicTest</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">dicTest</span><span class="p">.</span><span class="n">keys</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="n">dicTest</span><span class="p">.</span><span class="n">values</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="n">dicTest</span><span class="p">.</span><span class="n">items</span><span class="p">())</span>      <span class="c1"># (1, hana) like list
+</span>
+<span class="c1"># one
+# {1: 'one', 2: 'two', 3: 'three', 4: 'four'}
+# {1: 'hana', 2: 'two', 3: 'three', 4: 'four'}
+# dict_keys([1, 2, 3, 4])
+# dict_values(['hana', 'two', 'three', 'four'])
+# dict_items([(1, 'hana'), (2, 'two'), (3, 'three'), (4, 'four')])
+</span></code></pre></div></div>
+:ET

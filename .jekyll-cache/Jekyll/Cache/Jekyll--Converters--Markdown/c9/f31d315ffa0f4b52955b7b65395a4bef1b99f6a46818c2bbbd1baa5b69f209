@@ -1,0 +1,117 @@
+I"[&<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">KAIST 산업및시스템공학과 문일철_ 데이터 구조 및 분석 수업을 참고하여 작성하였습니다</span></p>
+<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">ch_1_11 Module and Import</span></p>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>정의</title>
+</head>
+<body>
+
+<pre>
+</pre>
+
+<p><span style="background: linear-gradient(to right, #ffa7a3, #5673bd); padding: 0.43em 1em; font-size: 19px; border-radius: 3px; color: #ffffff;">Module and Import</span></p>
+<pre>
+1. Module and Import
+: See how to separate the source code files
+- just put your code in another file (filename.py)
+: See how to use classes in other files
+- import filename
+: Use from to specify the directory, or the folder, path
+</pre>
+</body>
+</html>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Home.py
+</span><span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">ctime</span>
+
+<span class="k">class</span> <span class="nc">MyHome</span><span class="p">:</span>
+    <span class="n">colorRoof</span> <span class="o">=</span> <span class="s">'red'</span>
+    <span class="n">stateDoor</span> <span class="o">=</span> <span class="s">'closed'</span>
+    <span class="k">def</span> <span class="nf">paintRoof</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">color</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">colorRoof</span> <span class="o">=</span> <span class="n">color</span>
+    <span class="k">def</span> <span class="nf">openDoor</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">stateDoor</span> <span class="o">=</span> <span class="s">'open'</span>
+    <span class="k">def</span> <span class="nf">closeDoor</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">stateDoor</span> <span class="o">=</span> <span class="s">'close'</span>
+    <span class="k">def</span> <span class="nf">printStatus</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"Root color is "</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">colorRoof</span><span class="p">,</span> \
+              <span class="s">", and Door color is "</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">stateDoor</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">strAddress</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'Built on'</span><span class="p">,</span> <span class="n">strAddress</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'Built at'</span><span class="p">,</span> <span class="n">ctime</span><span class="p">())</span>
+    <span class="k">def</span> <span class="nf">__del__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'Destroyed at'</span><span class="p">,</span> <span class="n">ctime</span><span class="p">())</span>
+<span class="c1"># UsingMyHome.py
+</span><span class="kn">import</span> <span class="nn">main</span>
+<span class="n">homeAtDaejeon</span> <span class="o">=</span> <span class="n">main</span><span class="p">.</span><span class="n">MyHome</span><span class="p">(</span><span class="s">'Daejeon KAIST'</span><span class="p">)</span>
+<span class="n">homeAtDaejeon</span><span class="p">.</span><span class="n">printStatus</span><span class="p">()</span>
+
+<span class="c1"># Built on Daejeon KAIST        -&gt; constructor
+# Built at Sun Jul  4 00:49:25 2021     -&gt; constructor
+# Root color is  red , and Door color is  closed    -&gt; printStatus()
+# Destroyed at Sun Jul  4 00:49:25 2021     -&gt; deconstructor
+</span></code></pre></div></div>
+
+<body>
+<pre>
+2. Organizing Modules by Package
+: Directory or folder
+- Modules -&gt; filename.py
+: call these directories as package
+: previous information is exactly (from package import module)
+: package has
+- __init__.py in the directory
+- how to difeerentiate between the ordinary and the package directories
+</pre>
+</body>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">edu.kaist.session.edu.week1</span> <span class="kn">import</span> <span class="n">Home</span>
+</code></pre></div></div>
+
+<body>
+<pre>
+3. Sample Program : Interaction with your program
+</pre>
+</body>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">CashierLine</span> <span class="p">:</span>
+    <span class="n">lstLine</span> <span class="o">=</span> <span class="p">[]</span>    <span class="c1"># member variable (list_
+</span>    <span class="k">def</span> <span class="nf">addCustomer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">strName</span><span class="p">):</span>     <span class="c1">#member func
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">lstLine</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">strName</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">processCustomer</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">strReturnName</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">lstLine</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">lstLine</span><span class="p">.</span><span class="n">remove</span><span class="p">(</span><span class="n">strReturnName</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">strReturnName</span>
+    <span class="k">def</span> <span class="nf">printStatus</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">strReturn</span> <span class="o">=</span> <span class="s">""</span>
+        <span class="k">for</span> <span class="n">itr</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">lstLine</span><span class="p">))</span> <span class="p">:</span>
+            <span class="n">strReturn</span> <span class="o">+=</span> <span class="bp">self</span><span class="p">.</span><span class="n">lstLine</span><span class="p">[</span><span class="n">itr</span><span class="p">]</span> <span class="o">+</span> <span class="s">" "</span>
+        <span class="k">return</span> <span class="n">strReturn</span>
+
+<span class="n">binLoop</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="n">line</span> <span class="o">=</span> <span class="n">CashierLine</span><span class="p">()</span>
+<span class="k">while</span> <span class="n">binLoop</span><span class="p">:</span>
+    <span class="n">strName</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s">"Enter customer name : "</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">strName</span> <span class="o">==</span> <span class="s">"."</span><span class="p">:</span>
+        <span class="k">break</span>
+    <span class="k">elif</span> <span class="n">strName</span> <span class="o">==</span> <span class="s">"-&gt;"</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"Processed : "</span><span class="p">,</span> <span class="n">line</span><span class="p">.</span><span class="n">processCustomer</span><span class="p">())</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"Line : "</span><span class="p">,</span> <span class="n">line</span><span class="p">.</span><span class="n">printStatus</span><span class="p">())</span>
+    <span class="k">else</span> <span class="p">:</span>
+        <span class="n">line</span><span class="p">.</span><span class="n">addCustomer</span><span class="p">(</span><span class="n">strName</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"Line :"</span><span class="p">,</span> <span class="n">line</span><span class="p">.</span><span class="n">printStatus</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"Number of remaining custormers : "</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="p">.</span><span class="n">lstLine</span><span class="p">))</span>
+
+<span class="c1"># Enter customer name : Mooon
+# Line : Mooon 
+# Enter customer name : Sun
+# Line : Mooon Sun 
+# Enter customer name : -&gt;
+# Processed :  Mooon
+# Line :  Sun 
+# Enter customer name : .
+# Number of remaining custormers :  1
+</span></code></pre></div></div>
+:ET

@@ -1,0 +1,108 @@
+I"i<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">KAIST 산업및시스템공학과 문일철_ 데이터 구조 및 분석 수업을 참고하여 작성하였습니다</span></p>
+<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">ch_2_6 Structure and Relationship</span></p>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>정의</title>
+</head>
+<body>
+
+<pre>
+</pre>
+
+<p><span style="background: linear-gradient(to right, #ffa7a3, #5673bd); padding: 0.43em 1em; font-size: 19px; border-radius: 3px; color: #ffffff;">Structure and Relationship</span></p>
+<pre>
+1. Aggregation
+   - Generalization between class
+   - (= is-a relatinshipe)
+   - Inheritance relationship(superclass &amp; subclass)
+   - Customer -&gt; Person
+      : From subclass
+      : To superclass
+      : Direction of generalization
+   - Hollow triangle shape
+   - Base Class -&gt; Person
+   - Leaf class -&gt; Park::Customer
+
+2. Association
+   - Association between classes
+   - (= has-a relationship)
+   - Member variable (얼마나 복수개 가지고 있냐)
+      : A customer has a number of holding accounts (하나)
+      : An account has an account holdelr customer
+   - Simple line
+   - If a simple arrow is added
+      : A customer has a reference to bank accounts
+      : A bank account has a reference to a customer
+      : Navigability
+   - Line ends are tagged by role
+      : Account holder
+      : Holding accounts
+      : with prefix showing the visibility
+
+ex)
+Customer (1) &lt;-------------&gt; BankAccounts (* many)
+</pre>
+</body>
+</html>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Customer</span> <span class="p">:</span>
+   <span class="n">ID</span> <span class="o">=</span> <span class="s">"No one"</span>
+   <span class="n">lstAccounts</span> <span class="o">=</span> <span class="p">[]</span>
+   <span class="k">def</span> <span class="nf">addBankAccount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">account</span><span class="p">):</span>
+      <span class="bp">self</span><span class="p">.</span><span class="n">lstAccount</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">account</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">BankAccount</span> <span class="p">:</span>
+   <span class="n">strAccountHolder</span> <span class="o">=</span> <span class="s">"No one"</span>
+   <span class="k">def</span> <span class="nf">changeAccountHolder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">holder</span><span class="p">):</span>
+      <span class="bp">self</span><span class="p">.</span><span class="n">strAccountHolder</span> <span class="o">=</span> <span class="n">holder</span>
+</code></pre></div></div>
+
+<pre>
+2. Multiplicity of Association
+   - In computer science and engineering
+   - * often menas many
+   - 1 * : 1 to Many
+   - *  = 0 * : 0 to Many
+   - 1 : Exactly one
+   - 0 .. 1 : One or zero
+   - If not specified, it menas one
+</pre>
+
+<pre>
+3. Aggregation
+   - Special case of association
+   - Special has-a relationship
+   - part-whole or part-of relationship
+   - A family member is part of a family
+   - Hollow diamond shape
+   - Aggregation often occur
+   - when an aggregating class is a collection class
+   - when the collection class's life cycle depends on the collected classes
+
+ex)
+Family (1)(+has members) 다이아-------&gt; FamilyMember(1..*)(#Consist of)
+</pre>
+
+<pre>
+4. Dependency
+   - use relationship
+   - An engineer use a calculator
+   - Local variables
+   - Method signatures (parameter types)
+   - Method return types
+   - Something that you import for the implementation
+ex)
+Engineer ---------&gt; Calculator
+</pre>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Calculator</span> <span class="p">:</span>
+   <span class="k">def</span> <span class="nf">calculateLSomething</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="p">:</span>
+      <span class="k">return</span> <span class="p">....</span>
+<span class="k">class</span> <span class="nc">Engineer</span> <span class="p">:</span> 
+   <span class="k">def</span> <span class="nf">drawFloorplan</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="p">:</span>
+      <span class="n">calc</span> <span class="o">=</span> <span class="n">Caclulator</span><span class="p">()</span>
+      <span class="n">value</span> <span class="o">=</span> <span class="n">calc</span><span class="p">.</span><span class="n">calculateSomething</span><span class="p">()</span>
+      <span class="k">return</span> <span class="n">value</span>
+</code></pre></div></div>
+:ET

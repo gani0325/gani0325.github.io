@@ -1,0 +1,70 @@
+I"�<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">KAIST 산업및시스템공학과 문일철_ 데이터 구조 및 분석 수업을 참고하여 작성하였습니다</span></p>
+<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">ch_1_9 Assignment and Equivalence</span></p>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>정의</title>
+</head>
+<body>
+
+<pre>
+</pre>
+
+<p><span style="background: linear-gradient(to right, #ffa7a3, #5673bd); padding: 0.43em 1em; font-size: 19px; border-radius: 3px; color: #ffffff;">Assignment and Equivalence</span></p>
+<pre>
+1. Assignment and Equivalence
+: One variable's value is changed
+: But, you see three changes
+: Becuase
+- reference
+- x has two references from y and z
+- values of y and z are determined by x
+- x is changed
+: "=="checks the equivalence of two referenced values (두개의 레퍼런스)
+: "is" checks the equivalence of two referenced objets' IDs (같은 위치)
+</pre>
+</body>
+</html>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="mi">120</span><span class="p">]</span>   <span class="c1"># nested (둥지속)
+</span><span class="n">z</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="s">'a'</span><span class="p">,</span> <span class="s">'b'</span><span class="p">]</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s">'x is '</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'Y is '</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'z is '</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>
+
+<span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2021</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'</span><span class="se">\n</span><span class="s">x is '</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'Y is '</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'z is '</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>
+
+<span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">x2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+
+<span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="n">x2</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'Values are equivalent'</span><span class="p">)</span>
+<span class="k">else</span> <span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'Values are not equivalent'</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">x</span> <span class="ow">is</span> <span class="n">x2</span> <span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'Values are stored at the same place'</span><span class="p">)</span>
+<span class="k">else</span> <span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'Values are not stored at the same place'</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">is</span> <span class="n">Y</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'Values are stored at the same place'</span><span class="p">)</span>
+<span class="k">else</span> <span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'Values are not stored at the same place'</span><span class="p">)</span>
+
+<span class="c1"># x is  [1, 2, 3]
+# Y is  [100, [1, 2, 3], 120]
+# z is  [[1, 2, 3], 'a', 'b']
+</span>
+<span class="c1"># x is  [1, 2021, 3]
+# Y is  [100, [1, 2021, 3], 120]
+# z is  [[1, 2021, 3], 'a', 'b']
+# Values are equivalent
+# Values are not stored at the same place
+# Values are stored at the same place
+</span></code></pre></div></div>
+:ET

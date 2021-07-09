@@ -1,0 +1,54 @@
+I"�<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">KAIST 산업및시스템공학과 문일철_ 데이터 구조 및 분석 수업을 참고하여 작성하였습니다</span></p>
+<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">ch_2_2 UML notation I</span></p>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>정의</title>
+</head>
+<body>
+
+<pre>
+</pre>
+
+<p><span style="background: linear-gradient(to right, #ffa7a3, #5673bd); padding: 0.43em 1em; font-size: 19px; border-radius: 3px; color: #ffffff;">UML notation I</span></p>
+<pre>
+1. UML notation : Class and Instance
+- Abstract class : Person
+- Class : Custormer
+- Named instance : Park::Customer
+- Unnamed instance : Customer
+
+Ex)
+(Instance Name :: Class Name)
+Park::Customer
+----------------------------
+-Id : String
+#AccountNum : interger 
++Name : Stirng = hey
++login() : void
++requestWithdrawall() : Boolean
+
+1) Visibility options
+   + -&gt; public
+   # -&gt; protected
+   - -&gt; private
+2) Member variable, Attributes, property
+   +-#(name):type = (default value)
+3) Methods, memeber functions
+   +-#(name)(arguments):(type)
+
+
+
+
+
+
+
+
+
+
+
+</pre>
+</body>
+</html>
+:ET

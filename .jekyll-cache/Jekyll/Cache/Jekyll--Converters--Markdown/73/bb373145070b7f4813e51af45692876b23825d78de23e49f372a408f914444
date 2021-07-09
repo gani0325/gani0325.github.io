@@ -1,0 +1,43 @@
+I"u<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">KAIST 산업및시스템공학과 문일철_ 데이터 구조 및 분석 수업을 참고하여 작성하였습니다</span></p>
+<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">ch_2_6 Quiz 2</span></p>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>정의</title>
+</head>
+<body>
+
+<pre>
+</pre>
+
+<p><span style="background: linear-gradient(to right, #ffa7a3, #5673bd); padding: 0.43em 1em; font-size: 19px; border-radius: 3px; color: #ffffff;">Quiz 2</span></p>
+<pre>
+1. Software design is important because it is a schematic for software implementation.
+-&gt; T
+
+2. In terms of efficiency, good software means that it is easy to implement, is designed with a smaller size and has a faster speed of execution.
+-&gt; T
+
+3. In object-oriented design, Class is a result of execution.
+-&gt; F
+
+4. In the description of a Class, a public operation is shown by __.
+-&gt; +
+
+5. What is the name of class that contain one or more abstract methods?
+-&gt; Abstract Class
+
+6. ______between classes represents the use relationship.
+-&gt; Dependency
+
+7. What is the relationship between Customer, Employee and Person in Figure? (G__)
+-&gt; Generalization
+
+8. ______: Giving superclass's attributes, such as member variables and methods, to subclasses.
+-&gt; Inheritance
+
+</pre>
+</body>
+</html>
+:ET

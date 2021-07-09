@@ -1,20 +1,27 @@
-def main() :
-    numYearBase10 = 2021
-    numYearBase8 = 3733
-    numYearBase16 = 0x7DB
+for itr in range(10):
+    print(itr)
 
-    print("Year by base 10 : %d, by base 8: %d, by base 16 : %d"%(numYearBase10, numYearBase8, numYearBase16))
-    numComplex1 = complex(3, 4)
-    numComplex2 = 4+3j
+sum = 0
+for itr in range(1,11) :
+    sum += itr
+    print(sum)
 
-    print("Complex value : ", numComplex1)
-    print("Absolute value : ", abs(numComplex2))
-    print("Real value : ", numComplex2.real)
-    print("Image value : ", numComplex2.imag)
+for itr in range(1,100,10) :
+    if str == 51:
+        continue
+    else :
+        print(itr)
 
-    strDeptName = ("Industrial & System Engineering")
-    strUnivName = ("KAIST")
-    print("Department : ", strDeptName)
-    print("Full name of dept : ", strDeptName, ", ", strUnivName)
+for itr in range(5):
+    print(itr)
+else :
+    print(' ')
+print('done')
 
-main()    
+for itr in range(5):
+    if itr == 3:
+        break
+    print(itr)
+else :
+    print(' ')
+print('done')

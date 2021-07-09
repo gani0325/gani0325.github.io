@@ -1,0 +1,71 @@
+I"�<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">KAIST 산업및시스템공학과 문일철_ 데이터 구조 및 분석 수업을 참고하여 작성하였습니다</span></p>
+<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">ch_1_12 Quiz 1</span></p>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>정의</title>
+</head>
+<body>
+
+<pre>
+</pre>
+
+<p><span style="background: linear-gradient(to right, #ffa7a3, #5673bd); padding: 0.43em 1em; font-size: 19px; border-radius: 3px; color: #ffffff;">Quiz 1</span></p>
+<pre>
+1. Python has a dynamic type of variables
+-&gt; T
+
+2. 
+<practice.py>
+lstTest = list(range(1,19,3))
+print(lstTest)
+<result>
+[1, 4, 7, 10, 13, 16, 19]
+
+-&gt; F
+
+3. Tuple allows value changes.
+-&gt; F
+
+4. statements "continue" is only working at for loop.
+-&gt; F
+
+5. Deconstructor is called when a class is instantiated.
+-&gt; F
+
+6. When the string A is ‘IE260_QUIZ1’ (i.e. A=‘IE260_QUIZ1’ in python code), what is the value of len(A)
+-&gt; 11
+
+7.  Command symbol for making single-line comments in Python.
+-&gt; #
+
+8. We are going to write the code based on if statement. Fill in the blank.
+
+if boolean:
+  Statements for True
+____ boolean:
+  Statements for True
+else:
+  Statements for False
+
+--&gt; ____ = elif
+
+9. Fill in the blank with a proper word.(단답형, 1점)
+<practice2.py>
+x=[1,2,3]
+y=[100,x,120]
+print(y)
+<result>
+print(y)
+
+--&gt; [100, [1,2,3],120]
+
+10. Fill in the blank with a proper word.(단답형, 1점)
+what is the data type of 1.23 or 7.8e-28 in python?
+--&gt; float
+&lt;/pre&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</result></practice2.py></result></practice.py></pre></body></html>
+:ET

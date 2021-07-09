@@ -1,0 +1,85 @@
+I""<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">KAIST 산업및시스템공학과 문일철_ 데이터 구조 및 분석 수업을 참고하여 작성하였습니다</span></p>
+<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">ch_1_10 Class and Instance</span></p>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>정의</title>
+</head>
+<body>
+
+<pre>
+</pre>
+
+<p><span style="background: linear-gradient(to right, #ffa7a3, #5673bd); padding: 0.43em 1em; font-size: 19px; border-radius: 3px; color: #ffffff;">Class and Instance</span></p>
+<pre>
+1. Class and Instance
+: instantiation
+설계도(class) -&gt; 집 (instances)
+</pre>
+</body>
+</html>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">MyHome</span><span class="p">:</span>
+    <span class="n">colorRoof</span> <span class="o">=</span> <span class="s">'red'</span>
+    <span class="n">stateDoor</span> <span class="o">=</span> <span class="s">'closed'</span>
+    <span class="k">def</span> <span class="nf">paintRoof</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">color</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">colorRoof</span> <span class="o">=</span> <span class="n">color</span>
+    <span class="k">def</span> <span class="nf">openDoor</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">stateDoor</span> <span class="o">=</span> <span class="s">'open'</span>
+    <span class="k">def</span> <span class="nf">closeDoor</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">stateDoor</span> <span class="o">=</span> <span class="s">'close'</span>
+    <span class="k">def</span> <span class="nf">printStatus</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"Root color is "</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">colorRoof</span><span class="p">,</span> \
+              <span class="s">", and Door color is "</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">stateDoor</span><span class="p">)</span>
+<span class="n">homeAtDaejeon</span> <span class="o">=</span> <span class="n">MyHome</span><span class="p">()</span>
+<span class="n">homeAtSeoul</span> <span class="o">=</span> <span class="n">MyHome</span><span class="p">()</span>
+<span class="n">homeAtSeoul</span><span class="p">.</span><span class="n">openDoor</span><span class="p">()</span>
+<span class="n">homeAtDaejeon</span><span class="p">.</span><span class="n">paintRoof</span><span class="p">(</span><span class="s">'blue'</span><span class="p">)</span>
+<span class="n">homeAtDaejeon</span><span class="p">.</span><span class="n">printStatus</span><span class="p">()</span>
+<span class="n">homeAtSeoul</span><span class="p">.</span><span class="n">printStatus</span><span class="p">()</span>
+
+<span class="c1"># Root color is  blue , and Door color is  closed
+# Root color is  red , and Door color is  open
+</span></code></pre></div></div>
+<body>
+<pre>
+2. Important Methods in Class (Constructor, Destructor)
+: Some basic methods, or member functions in classes
+- constructor : called when instantiated
+---&gt; def__init__(self, . . .) :
+- deconstructor : called when the instance is removed from the value table
+---&gt; def __del__(self) :
+</pre>
+</body>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">ctime</span>
+
+<span class="k">class</span> <span class="nc">MyHome</span><span class="p">:</span>
+    <span class="n">colorRoof</span> <span class="o">=</span> <span class="s">'red'</span>
+    <span class="n">stateDoor</span> <span class="o">=</span> <span class="s">'closed'</span>
+    <span class="k">def</span> <span class="nf">paintRoof</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">color</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">colorRoof</span> <span class="o">=</span> <span class="n">color</span>
+    <span class="k">def</span> <span class="nf">openDoor</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">stateDoor</span> <span class="o">=</span> <span class="s">'open'</span>
+    <span class="k">def</span> <span class="nf">closeDoor</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">stateDoor</span> <span class="o">=</span> <span class="s">'close'</span>
+    <span class="k">def</span> <span class="nf">printStatus</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"Root color is "</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">colorRoof</span><span class="p">,</span> \
+              <span class="s">", and Door color is "</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">stateDoor</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">strAddress</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'Built on'</span><span class="p">,</span> <span class="n">strAddress</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'Built at'</span><span class="p">,</span> <span class="n">ctime</span><span class="p">())</span>
+    <span class="k">def</span> <span class="nf">__del__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'Destroyed at'</span><span class="p">,</span> <span class="n">ctime</span><span class="p">())</span>
+
+<span class="n">homeAtDaejeon</span> <span class="o">=</span> <span class="n">MyHome</span><span class="p">(</span><span class="s">'Daejeon KAIST'</span><span class="p">)</span>
+<span class="n">homeAtDaejeon</span><span class="p">.</span><span class="n">printStatus</span><span class="p">()</span>
+<span class="k">del</span> <span class="n">homeAtDaejeon</span>
+
+<span class="c1"># Built on Daejeon KAIST
+# Built at Sun Jul  4 00:49:25 2021
+# Root color is  red , and Door color is  closed
+# Destroyed at Sun Jul  4 00:49:25 2021
+</span></code></pre></div></div>
+:ET

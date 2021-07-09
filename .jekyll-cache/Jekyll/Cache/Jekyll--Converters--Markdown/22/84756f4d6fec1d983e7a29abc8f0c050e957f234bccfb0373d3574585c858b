@@ -1,0 +1,81 @@
+I"�<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">KAIST 산업및시스템공학과 문일철_ 데이터 구조 및 분석 수업을 참고하여 작성하였습니다</span></p>
+<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">ch_1_8 Function Statement
+</span></p>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>정의</title>
+</head>
+<body>
+
+<pre>
+</pre>
+
+<p><span style="background: linear-gradient(to right, #ffa7a3, #5673bd); padding: 0.43em 1em; font-size: 19px; border-radius: 3px; color: #ffffff;">Function Statement</span></p>
+<pre>
+1. Function Statement
+: y = f(x)
+: output = f(input)
+: return multiple variable (keep them in order)
+: don't hove to specify return type
+: One line function is called lambda function
+- def name(parameters) :
+    statements            -&gt; 함수내용
+    return val1, val2 ... -&gt; 결과물
+</pre>
+</body>
+</html>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">numA</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">numB</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">numParam1</span><span class="p">,</span> <span class="n">numParam2</span><span class="p">)</span> <span class="p">:</span>
+    <span class="k">return</span> <span class="n">numParam1</span> <span class="o">+</span> <span class="n">numParam2</span>
+<span class="k">def</span> <span class="nf">multiply</span><span class="p">(</span><span class="n">numParam1</span><span class="p">,</span> <span class="n">numParam2</span><span class="p">)</span> <span class="p">:</span>
+    <span class="k">return</span> <span class="n">numParam1</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span> <span class="n">numParam2</span><span class="o">*</span><span class="mi">3</span>
+<span class="k">def</span> <span class="nf">increase</span> <span class="p">(</span><span class="n">numParam1</span><span class="p">,</span> <span class="n">step</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">:</span>
+    <span class="k">return</span> <span class="n">numParam1</span> <span class="o">+</span> <span class="n">step</span>
+
+<span class="n">numC</span> <span class="o">=</span> <span class="n">add</span><span class="p">(</span><span class="n">numA</span><span class="p">,</span> <span class="n">numB</span><span class="p">)</span>
+<span class="n">numD</span><span class="p">,</span> <span class="n">numE</span> <span class="o">=</span> <span class="n">multiply</span><span class="p">(</span><span class="n">numA</span><span class="p">,</span> <span class="n">numB</span><span class="p">)</span>
+<span class="n">numF</span> <span class="o">=</span> <span class="n">increase</span><span class="p">(</span><span class="n">numA</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">numG</span> <span class="o">=</span> <span class="n">increase</span><span class="p">(</span><span class="n">numA</span><span class="p">)</span>
+
+<span class="n">lambdaAdd</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">numParam1</span><span class="p">,</span> <span class="n">numParam2</span> <span class="p">:</span> <span class="n">numParam1</span> <span class="o">+</span> <span class="n">numParam2</span>
+<span class="n">numH</span> <span class="o">=</span> <span class="n">lambdaAdd</span><span class="p">(</span><span class="n">numA</span><span class="p">,</span> <span class="n">numB</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">numC</span><span class="p">,</span> <span class="n">numD</span><span class="p">,</span> <span class="n">numE</span><span class="p">,</span><span class="n">numF</span><span class="p">,</span> <span class="n">numG</span><span class="p">,</span> <span class="n">numH</span><span class="p">)</span>
+
+<span class="c1"># 3 2 6 6 2 3
+</span></code></pre></div></div>
+<body>
+<pre>
+2. Example Program : Finding Prime Numbers (소수 출력하기)
+</pre>
+</body>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">isPrimeNumber</span><span class="p">(</span><span class="n">numParam1</span><span class="p">)</span> <span class="p">:</span>
+    <span class="k">for</span> <span class="n">itr</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">numParam1</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">numParam1</span> <span class="o">%</span> <span class="n">itr</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">break</span>
+    <span class="k">else</span> <span class="p">:</span>
+        <span class="k">return</span> <span class="bp">True</span>
+    <span class="k">return</span> <span class="bp">False</span>
+<span class="c1"># --&gt; Function for calculation
+</span>
+<span class="k">def</span> <span class="nf">findPrimes</span><span class="p">(</span><span class="n">numParam1</span><span class="p">,</span> <span class="n">numParam2</span><span class="p">):</span>
+    <span class="n">numCount</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">for</span> <span class="n">itr</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">numParam1</span><span class="p">,</span> <span class="n">numParam2</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">isPrimeNumber</span><span class="p">(</span><span class="n">itr</span><span class="p">)</span> <span class="o">==</span> <span class="bp">True</span> <span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">numCount</span><span class="p">,</span> <span class="s">"th prime : "</span><span class="p">,</span> <span class="n">itr</span><span class="p">)</span>
+            <span class="n">numCount</span> <span class="o">=</span> <span class="n">numCount</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="c1"># --&gt; Function for iteration
+</span><span class="n">findPrimes</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>      <span class="c1"># --&gt; Function call
+</span>
+<span class="c1"># 1 th prime :  1
+# 2 th prime :  2
+# 3 th prime :  3
+# 4 th prime :  5
+# 5 th prime :  7
+</span></code></pre></div></div>
+:ET

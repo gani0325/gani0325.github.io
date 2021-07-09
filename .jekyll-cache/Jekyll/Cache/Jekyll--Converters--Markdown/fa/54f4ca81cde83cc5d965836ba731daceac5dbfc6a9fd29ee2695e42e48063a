@@ -1,0 +1,39 @@
+I"<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">KAIST 산업및시스템공학과 문일철_ 데이터 구조 및 분석 수업을 참고하여 작성하였습니다</span></p>
+<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">ch_2_2 UML notation 2</span></p>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>정의</title>
+</head>
+<body>
+
+<pre>
+</pre>
+
+<p><span style="background: linear-gradient(to right, #ffa7a3, #5673bd); padding: 0.43em 1em; font-size: 19px; border-radius: 3px; color: #ffffff;">UML notation 2</span></p>
+<pre>
+1. More bout UML notations
+   - Many types of UML diagrames used for different stages of development
+   - Use-case diagram
+   - Class diagram
+   - State diagram
+   - Deplvment diagrma
+   - dealing with OOP
+      : Mainly calss and instance
+      : Some of software design patterns
+      : Focus on class diagram
+
+2. UML notation : Class and Instance
+   - Abstract class -&gt; Person
+   - Class -&gt; Customer
+   - Named instance &amp; Unnamed instance -&gt; Park::Customer, :Customer
+
+3. Structure of Classes in Class Diagram
+   - Entity and Relations make a structure
+   - Relationshipe and its characteristic
+      (associate, generalization, multiplicity)
+</pre>
+</body>
+</html>
+:ET

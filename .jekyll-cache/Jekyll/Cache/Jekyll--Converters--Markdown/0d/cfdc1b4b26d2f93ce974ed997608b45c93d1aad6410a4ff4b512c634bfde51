@@ -1,0 +1,66 @@
+I"�	<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">KAIST 산업및시스템공학과 문일철_ 데이터 구조 및 분석 수업을 참고하여 작성하였습니다</span></p>
+<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">ch_2_1 Design and Programming</span></p>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>정의</title>
+</head>
+<body>
+
+<pre>
+</pre>
+
+<p><span style="background: linear-gradient(to right, #ffa7a3, #5673bd); padding: 0.43em 1em; font-size: 19px; border-radius: 3px; color: #ffffff;">Design and Programming</span></p>
+<pre>
+
+1. objectives
+- Object-oriented concepts
+  (class, instance, inheritance, encapsulation . . )
+- A formal representation of software design
+  (Memorizing a number of UML notations)
+- A number of software design patterns
+  (Factor, Adapter, Bridge, composite, observer)
+  (Memorizing their semantics and structures) 
+
+2. Design and Programming
+Software Design(설계도) ---개발---&gt; Software Implementation
+
+3. Good Software Design
+1) Building Design
+- Correctness : Meet owner's purpose, 성공적인 구조 without faults
+- Robustness : Maintain integrity in a certain level of typhoons
+- Flexibility : Enable future expansion &amp; modifications of the structures
+- Usability &amp; Reusability : Good support for designed purpose,
+  Easy to use for other purposes and other areas
+- Efficiency : Easy to build, cover less area, Good mobility in the
+  structures
+2) Software Design
+- Correctness : Meet client's purpose, 성공적 수행 without errors
+- Robustness : Execute under expected overloads
+- Flexibility : Enable the future updates &amp; expansions of functions
+- Usability &amp; Reusability : Good support for the designed
+  Easy to use for other purposes and other contexts
+- Efficiency : Easy to implement, smaller size, Faster execution
+
+4. Object-oriented Design
+Real world concepts
+Abstract ---&gt; Customer(software design entities)
+Abstract ---&gt; Transaction(software design entities)
+Abstract ---&gt; Banking(software design entities)
+: Concepts 이름 정하기 =&gt; 특징 정하기 (member variable, attitbutes)
+=&gt; 행동 정하기
+
+5. What are Class and Instance ?
+1) Class
+  - Result of design &amp; implementaion (하나의 디자인, 설계도)
+  - Conceptualization
+  - Corresponds to design abstractions
+2) Instance
+  - Result of execution (실행한 결과) 
+  - Realization
+  - Corresponds to real world entities
+</pre>
+</body>
+</html>
+:ET

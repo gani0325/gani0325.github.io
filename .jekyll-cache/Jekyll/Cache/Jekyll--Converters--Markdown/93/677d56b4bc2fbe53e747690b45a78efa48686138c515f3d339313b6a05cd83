@@ -1,0 +1,136 @@
+I"�<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">KAIST 산업및시스템공학과 문일철_ 데이터 구조 및 분석 수업을 참고하여 작성하였습니다</span></p>
+<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">ch_1_7 Conditon and Loop statement
+</span></p>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>정의</title>
+</head>
+<body>
+
+<pre>
+</pre>
+
+<p><span style="background: linear-gradient(to right, #ffa7a3, #5673bd); padding: 0.43em 1em; font-size: 19px; border-radius: 3px; color: #ffffff;">Conditon and Loop statement</span></p>
+<pre>
+1. if
+: A condition statement
+- if boolean :
+    statements for True
+- elif boolean :
+    statements for True
+- else :
+    statements for False
+: python does not have a switch-case statement
+: carefully indentations (들여쓰기)
+</pre>
+</body>
+</html>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">numScore</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="k">if</span> <span class="n">numScore</span> <span class="o">&gt;</span> <span class="mi">90</span> <span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'A'</span><span class="p">)</span>
+
+<span class="n">numScore</span> <span class="o">=</span> <span class="mi">75</span>
+<span class="k">if</span> <span class="n">numScore</span> <span class="o">&gt;</span> <span class="mi">90</span> <span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'A'</span><span class="p">)</span>
+<span class="k">else</span> <span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"Lower grade"</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">numScore</span> <span class="o">&gt;</span> <span class="mi">90</span> <span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'A'</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">numScore</span> <span class="o">&gt;</span> <span class="mi">80</span> <span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'B'</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">numScore</span> <span class="o">&gt;</span> <span class="mi">70</span> <span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'C'</span><span class="p">)</span>
+<span class="k">else</span> <span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'D or F'</span><span class="p">)</span>
+
+<span class="c1"># A
+# Lower grade
+# C
+</span></code></pre></div></div>
+<body>
+<pre>
+2. For
+: A loop statement
+- for variable in sequence
+    statement for loop
+- else :
+    a break
+: continue or break
+</pre>
+</body>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">itr</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">itr</span><span class="p">)</span>
+
+<span class="nb">sum</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">itr</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">11</span><span class="p">)</span> <span class="p">:</span>
+    <span class="nb">sum</span> <span class="o">+=</span> <span class="n">itr</span>
+    <span class="k">print</span><span class="p">(</span><span class="nb">sum</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">itr</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span> <span class="p">:</span>
+    <span class="k">if</span> <span class="nb">str</span> <span class="o">==</span> <span class="mi">51</span><span class="p">:</span>
+        <span class="k">continue</span>
+    <span class="k">else</span> <span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">itr</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">itr</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">itr</span><span class="p">)</span>
+<span class="k">else</span> <span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'!'</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'done'</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">itr</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">itr</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="k">break</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">itr</span><span class="p">)</span>
+<span class="k">else</span> <span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'!'</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'done'</span><span class="p">)</span>
+
+<span class="c1"># 0
+# 1
+# 2
+# 3
+# 4
+# 5
+# 6
+# 7
+# 8
+# 9
+# 1
+# 3
+# 6
+# 10
+# 15
+# 21
+# 28
+# 36
+# 45
+# 55
+# 1
+# 11
+# 21
+# 31
+# 41
+# 51
+# 61
+# 71
+# 81
+# 91
+# 0
+# 1
+# 2
+# 3
+# 4
+# !
+# done
+# 0
+# 1
+# 2
+# done
+</span></code></pre></div></div>
+:ET
