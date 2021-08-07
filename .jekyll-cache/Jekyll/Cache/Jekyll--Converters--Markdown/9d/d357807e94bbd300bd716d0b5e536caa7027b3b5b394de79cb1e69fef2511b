@@ -1,0 +1,123 @@
+I"�3<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">KAIST 산업및시스템공학과 문일철_ 데이터 구조 및 분석 수업을 참고하여 작성하였습니다</span></p>
+<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">ch_3_4 Linked List II</span></p>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>정의</title>
+</head>
+<body>
+
+<pre>
+</pre>
+
+<p><span style="background: linear-gradient(to right, #ffa7a3, #5673bd); padding: 0.43em 1em; font-size: 19px; border-radius: 3px; color: #ffffff;">Linked List II</span></p>
+
+<pre>
+1. Head and Tail
+   : Specialized node
+        - Head : Always at the first of the list
+        - Tail : Always at the last of the list
+        - two corner stone showing the start and the end of the list
+   : optional node
+        - Linked list works okay without these
+        - But, having these makes implementation very convenient
+
+2. Search precedure in singly linked list
+    : just like an array, navigating from the first to the last until hit is the only way
+    : No difference in the search pattern, though you can't use index any further!!!
+    : Your list implementation may include the index funtion, but isn't required in the linked list
+    1) Head from list
+    2) detect next node
+        if next == tail : break
+        if next != tail : next.object= '~~'
+
+3. Insert procedure in singly linked list
+    : you see the power of a linked list
+    : you need N retrievals to insert a value in the array list
+    : you need only three operations
+        1) with an assumption that you have a reference to the node(pre) 
+        that you want to put your new node next
+        2) you store a node(next), pointed by a reference
+        from node(pre)'s nodeNext member variable
+        3) you change a reference from node(pre)'s
+        nodeNext to node(new)
+        4) you change a reference from node(new)'s nodeNext to node(new)
+    : Over-written with a new reference to the new node
+4. Delete procedure in singly linked list
+    : the another moment that you see the power of a linked list
+    : you need N retrievals to delete a value in the array list
+    : you need only three operation
+        1) with an assumption that you have a reference to node,(pre) that you
+        want to remove the node next
+        1) you retreive node(next) that is two step next from node(next)
+        2) you change a reference from node(pre)'s nodeNext to node(next)
+    : The node will be remeoved, becuase is no reference to node(remove)
+    : Over-written with a new reference to the next node of the removed one
+</pre>
+</body>
+</html>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Node</span> <span class="p">:</span>
+    <span class="n">nodeNext</span> <span class="o">=</span> <span class="s">''</span>
+    <span class="n">objValue</span> <span class="o">=</span> <span class="s">''</span>
+    <span class="n">binHead</span> <span class="o">=</span> <span class="bp">False</span>
+    <span class="n">binTail</span> <span class="o">=</span> <span class="bp">False</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">objValue</span> <span class="o">=</span> <span class="s">''</span><span class="p">,</span> <span class="n">nodeNext</span> <span class="o">=</span> <span class="s">''</span><span class="p">,</span><span class="n">binHead</span> <span class="o">=</span> <span class="bp">False</span><span class="p">,</span> <span class="n">binTail</span> <span class="o">=</span> <span class="bp">False</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">nodeNext</span> <span class="o">=</span> <span class="n">nodeNext</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">objValue</span> <span class="o">=</span> <span class="n">objValue</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">binHead</span> <span class="o">=</span> <span class="n">binHead</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">binTail</span> <span class="o">=</span> <span class="n">binTail</span>
+    <span class="k">def</span> <span class="nf">getValue</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">objValue</span>
+    <span class="k">def</span> <span class="nf">setValue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">objValue</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">objValue</span> <span class="o">=</span> <span class="n">objValue</span>
+    <span class="k">def</span> <span class="nf">getNext</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">nodeNext</span>
+    <span class="k">def</span> <span class="nf">setNext</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nodeNext</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">nodeNext</span> <span class="o">=</span> <span class="n">nodeNext</span>
+    <span class="k">def</span> <span class="nf">isHead</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">binHead</span>
+    <span class="k">def</span> <span class="nf">isTail</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">binTail</span>
+
+<span class="n">node1</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="n">objValue</span><span class="o">=</span><span class="s">'a'</span><span class="p">)</span>
+<span class="n">nodeTail</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="n">binTail</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
+<span class="n">nodeHead</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="n">binHead</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span> <span class="n">nodeNext</span> <span class="o">=</span> <span class="n">node1</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">SinglyLinkedList</span><span class="p">:</span>
+    <span class="n">nodeNew</span> <span class="o">=</span> <span class="s">''</span>
+    <span class="n">nodePrev</span> <span class="o">=</span> <span class="s">''</span>
+    <span class="n">size</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>     <span class="c1"># Constructor
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">nodeTail</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="n">binTail</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">nodeHead</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="n">binHead</span><span class="o">=</span> <span class="bp">True</span><span class="p">,</span> <span class="n">nodeNext</span><span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">nodeTail</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">insertAt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">objInsert</span><span class="p">,</span> <span class="n">idexInsert</span><span class="p">):</span>
+        <span class="n">nodeNew</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="n">objValue</span><span class="o">=</span><span class="n">objInsert</span><span class="p">)</span>
+        <span class="n">nodePrev</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">idexInsert</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">nodeNext</span> <span class="o">=</span> <span class="n">nodePrev</span><span class="p">.</span><span class="n">getNext</span><span class="p">()</span>
+        <span class="n">nodePrev</span><span class="p">.</span><span class="n">setNext</span><span class="p">(</span><span class="n">nodeNew</span><span class="p">)</span>   <span class="c1"># nodePrev -&gt; nodeNew
+</span>        <span class="n">nodeNew</span><span class="p">.</span><span class="n">setNext</span><span class="p">(</span><span class="n">nodeNext</span><span class="p">)</span>   <span class="c1"># nodeNEW -&gt; nodeNext
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">size</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">size</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="k">def</span> <span class="nf">removeAt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idxRemove</span><span class="p">):</span>
+        <span class="n">nodePrev</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">idxRemove</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">nodeRemove</span> <span class="o">=</span> <span class="n">nodePrev</span><span class="p">.</span><span class="n">getNext</span><span class="p">()</span>
+        <span class="n">nodeNext</span> <span class="o">=</span> <span class="n">nodeRemove</span><span class="p">.</span><span class="n">getNext</span><span class="p">()</span>
+        <span class="n">nodePrev</span><span class="p">.</span><span class="n">setNext</span><span class="p">(</span><span class="n">nodeNext</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">size</span><span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">size</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="k">return</span> <span class="n">nodeRemove</span><span class="p">.</span><span class="n">getValue</span><span class="p">()</span>
+    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idxRetrieve</span><span class="p">):</span>
+        <span class="n">nodeReturn</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">nodeHead</span>
+        <span class="k">for</span> <span class="n">itr</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">idxRetrieve</span> <span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+            <span class="n">nodeReturn</span> <span class="o">=</span> <span class="n">nodeReturn</span><span class="p">.</span><span class="n">getNext</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">nodeReturn</span>
+    <span class="k">def</span> <span class="nf">printStatus</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">nodeCurrent</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">nodeHead</span>
+        <span class="k">while</span> <span class="n">nodeCurrent</span><span class="p">.</span><span class="n">getNext</span><span class="p">().</span><span class="n">isTail</span><span class="p">()</span> <span class="o">==</span><span class="bp">False</span><span class="p">:</span>
+            <span class="n">nodeCurrent</span> <span class="o">=</span> <span class="n">nodeCurrent</span><span class="p">.</span><span class="n">getNext</span><span class="p">()</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">nodeCurrent</span><span class="p">.</span><span class="n">getNext</span><span class="p">())</span>
+        <span class="k">print</span><span class="p">()</span>
+    <span class="k">def</span> <span class="nf">getSize</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">size</span>
+</code></pre></div></div>
+:ET

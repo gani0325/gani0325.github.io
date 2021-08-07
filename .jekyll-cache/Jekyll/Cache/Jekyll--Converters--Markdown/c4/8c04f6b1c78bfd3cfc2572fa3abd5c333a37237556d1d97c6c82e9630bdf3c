@@ -1,0 +1,36 @@
+I"<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">KAIST 산업및시스템공학과 문일철_ 데이터 구조 및 분석 수업을 참고하여 작성하였습니다</span></p>
+<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">ch_4_3 Dynamic Programming 1 (Memoization)</span></p>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>정의</title>
+</head>
+<body>
+
+<pre>
+</pre>
+
+<p><span style="background: linear-gradient(to right, #ffa7a3, #5673bd); padding: 0.43em 1em; font-size: 19px; border-radius: 3px; color: #ffffff;">Dynamic Programming 1 (Memoization)</span></p>
+
+<pre>
+1. Dynamic Programming 1 (Memoization)
+    : A general algorithm for solving problem
+        (as recurrences with overlapping sub-instance)
+    : Probramming == Planning
+    : Main storyline
+        - solve small instances once
+        - record solutions in a table
+
+2. Menoization
+    : Key technique of dynamic programming
+        - Simply put (storing the results of previous
+            function calls to resue the result again)
+        - More philosophical sense
+            - Bottom-up approach for problem-solving
+            - bottom : Recursion (top down)
+            - up : Dynamic Programming (bottom up)
+</pre>
+</body>
+</html>
+:ET

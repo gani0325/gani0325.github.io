@@ -1,0 +1,74 @@
+I"�<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">KAIST 산업및시스템공학과 문일철_ 데이터 구조 및 분석 수업을 참고하여 작성하였습니다</span></p>
+<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">ch_4_2 Merge Sort and Problems in Recursions</span></p>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>정의</title>
+</head>
+<body>
+
+<pre>
+</pre>
+
+<p><span style="background: linear-gradient(to right, #ffa7a3, #5673bd); padding: 0.43em 1em; font-size: 19px; border-radius: 3px; color: #ffffff;">Merge Sort and Problems in Recursions</span></p>
+
+<pre>
+1. Merge Sort
+   : One example of recursive programming
+   : Decompose into two smaller lists (분해)
+   : Aggregate to one larger and sorted list (합치기)
+</pre>
+</body>
+</html>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">random</span>
+
+<span class="k">def</span> <span class="nf">performMergeSort</span><span class="p">(</span><span class="n">lstElementToSort</span><span class="p">)</span> <span class="p">:</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">lstElementToSort</span><span class="p">)</span> <span class="o">==</span><span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">lstElementToSort</span>
+
+    <span class="n">lstSubElementToSort1</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">lstSubElementToSort2</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">itr</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">lstElementToSort</span><span class="p">))</span> <span class="p">:</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">lstElementToSort</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span> <span class="o">&gt;</span> <span class="n">itr</span><span class="p">:</span>
+            <span class="n">lstSubElementToSort1</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">lstElementToSort</span><span class="p">[</span><span class="n">itr</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">lstSubElementToSort2</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">lstElementToSort</span><span class="p">[</span><span class="n">itr</span><span class="p">])</span>
+    <span class="n">lstSubElementToSort1</span> <span class="o">=</span> <span class="n">performMergeSort</span><span class="p">(</span><span class="n">lstSubElementToSort1</span><span class="p">)</span>
+    <span class="n">lstSubElementToSort2</span> <span class="o">=</span> <span class="n">performMergeSort</span><span class="p">(</span><span class="n">lstSubElementToSort2</span><span class="p">)</span>
+
+    <span class="n">idxCount1</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">idxCount2</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">itr</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">lstElementToSort</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">idxCount1</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">lstSubElementToSort1</span><span class="p">)</span> <span class="p">:</span>
+            <span class="n">lstElementToSort</span><span class="p">[</span><span class="n">itr</span><span class="p">]</span> <span class="o">=</span> <span class="n">lstSubElementToSort2</span><span class="p">[</span><span class="n">idxCount2</span><span class="p">]</span>
+            <span class="n">idxCount2</span> <span class="o">=</span> <span class="n">idxCount2</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">elif</span> <span class="n">idxCount2</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">lstSubElementToSort2</span><span class="p">)</span> <span class="p">:</span>
+            <span class="n">lstElementToSort</span><span class="p">[</span><span class="n">itr</span><span class="p">]</span> <span class="o">=</span> <span class="n">lstSubElementToSort1</span><span class="p">[</span><span class="n">idxCount1</span><span class="p">]</span>
+            <span class="n">idxCount1</span> <span class="o">=</span> <span class="n">idxCount1</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">elif</span> <span class="n">lstSubElementToSort1</span><span class="p">[</span><span class="n">idxCount1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">lstSubElementToSort2</span><span class="p">[</span><span class="n">idxCount2</span><span class="p">]</span> <span class="p">:</span>
+            <span class="n">lstElementToSort</span><span class="p">[</span><span class="n">itr</span><span class="p">]</span> <span class="o">=</span> <span class="n">lstSubElementToSort2</span><span class="p">[</span><span class="n">idxCount2</span><span class="p">]</span>
+            <span class="n">idxCount2</span> <span class="o">=</span> <span class="n">idxCount2</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">lstElementToSort</span><span class="p">[</span><span class="n">itr</span><span class="p">]</span> <span class="o">=</span> <span class="n">lstSubElementToSort1</span><span class="p">[</span><span class="n">idxCount1</span><span class="p">]</span>
+            <span class="n">idxCount1</span> <span class="o">=</span> <span class="n">idxCount1</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">lstElementToSort</span>
+
+<span class="n">lstRandom</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">itr</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">):</span>
+    <span class="n">lstRandom</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">random</span><span class="p">.</span><span class="n">randrange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">lstRandom</span><span class="p">)</span>
+<span class="n">lstRandom</span> <span class="o">=</span> <span class="n">performMergeSort</span><span class="p">(</span><span class="n">lstRandom</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">lstRandom</span><span class="p">)</span>
+
+<span class="c1"># [27, 19, 26, 99, 50, 56, 2, 18, 55, 21]
+# [2, 18, 19, 21, 26, 27, 50, 55, 56, 99]
+</span></code></pre></div></div>
+
+<pre>
+2. Problems in Recursions of Fibonacci Sequence
+    : Problems in recursions
+    : Excessive functions again and again (same parameters)
+</pre>
+:ET

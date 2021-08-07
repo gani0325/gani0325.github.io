@@ -1,0 +1,37 @@
+I"�<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">K 실전 알고리즘 강좌(Algorithm Programming Tutorial) 동빈나 님 수업을 참고하여 작성하였습니다</span></p>
+<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">2_정렬의 개요와 선택 정렬</span></p>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>정의</title>
+</head>
+<body>
+
+<pre>
+</pre>
+
+<p><span style="background: linear-gradient(to right, #ffa7a3, #5673bd); padding: 0.43em 1em; font-size: 19px; border-radius: 3px; color: #ffffff;">정렬의 개요와 선택 정렬</span></p>
+
+<pre>
+1. 정렬 (Sort)
+   1) 선택 정렬
+        : 가장 작은 것을 선택해서 제일 앞으로 보내는
+        알고리즘
+</pre>
+</body>
+</html>
+
+<blockquote>
+  <p><strong>가장 작은 것을 선택해서 제일 앞으로
+보내면 어떨까?</strong></p>
+</blockquote>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;stdio.h&gt;
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+	<span class="n">printf</span><span class="p">(</span><span class="s">"Hello world!"</span><span class="p">);</span>
+	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+:ET

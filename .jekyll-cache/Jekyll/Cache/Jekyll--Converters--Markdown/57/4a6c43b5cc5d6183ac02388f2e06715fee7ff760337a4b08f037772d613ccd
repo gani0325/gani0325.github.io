@@ -1,0 +1,36 @@
+I"�<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">java 입문 수업(생활코딩) 수업을 참고하여 작성하였습니다</span></p>
+<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">JAVA_명시적형변환</span></p>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>정의</title>
+</head>
+<body>
+
+<pre>
+</pre>
+
+<p><span style="background: linear-gradient(to right, #ffa7a3, #5673bd); padding: 0.43em 1em; font-size: 19px; border-radius: 3px; color: #ffffff;">명시적형변환</span></p>
+
+<pre>
+2) 명시적 형 변환
+  - 자동 형 변환이 적용되지 않는 경우에는 
+    수동으로 형 변환을 해야 한다
+  - 이를 명시적(Explicit Conversion)이라고 한다
+  - 아래 예제는 모든 행의 코드에서 오류가 발생한다
+  - 자동 형 변환이 이루어지지 않기 때문
+  - 아래와 같이 괄호 안에 데이터 타입을 지정해서 
+   값 앞에 위치시키는 것을 명시적인 형 변환이라고 부른다
+</pre>
+</body>
+</html>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">float</span> <span class="n">a</span> <span class="o">=</span> <span class="mf">100.0</span><span class="o">;</span>
+<span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="mf">100.0</span><span class="no">F</span><span class="o">;</span>
+<span class="c1">// error</span>
+
+<span class="kt">float</span> <span class="n">a</span> <span class="o">=</span> <span class="o">(</span><span class="kt">float</span><span class="o">)</span><span class="mf">100.0</span><span class="o">;</span>
+<span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span><span class="mf">100.0</span><span class="no">F</span><span class="o">;</span>
+</code></pre></div></div>
+:ET

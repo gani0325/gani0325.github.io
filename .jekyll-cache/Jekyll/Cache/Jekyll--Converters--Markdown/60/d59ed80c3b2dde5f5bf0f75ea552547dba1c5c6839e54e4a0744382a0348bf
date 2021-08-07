@@ -1,0 +1,54 @@
+I"m<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">KAIST 산업및시스템공학과 문일철_ 데이터 구조 및 분석 수업을 참고하여 작성하였습니다</span></p>
+<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">ch_4_7 Quiz 4</span></p>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>정의</title>
+</head>
+<body>
+
+<pre>
+</pre>
+
+<p><span style="background: linear-gradient(to right, #ffa7a3, #5673bd); padding: 0.43em 1em; font-size: 19px; border-radius: 3px; color: #ffffff;">Quiz 4</span></p>
+
+<pre>
+1. Recursion is a method to call a function within a function with reduced parameter size.
+-&gt; T
+
+2. The notion of recursion is similar to the notion of mathematical induction.
+-&gt; T
+
+3. Dynamic programming stores the results of previous function calls to reuse in the future.
+-&gt; T
+
+4. Dynamic programming cannot be transformed into recursion.
+-&gt; F
+
+5. The problem of recursion is excessive function calls.
+-&gt; T
+
+</pre>
+</body>
+</html>
+
+<pre>
+6. Figure below is a process of assembly line scheduling. Chart (a) represents lasting time. We want to complete the charts.
+</pre>
+<p><img src="https://cphinf.pstatic.net/mooc/20190924_182/1569290665936UDVCN_PNG/q4_1.png" />
+<img src="https://cphinf.pstatic.net/mooc/20190924_145/1569290678656D3dGs_PNG/q4-2.png" /></p>
+
+<pre>
+6 &amp; 7. What is the value for location with L1 and 3 in Table - (L1, 3)?
+-&gt; 21
+
+8. Write the fastest path and time of this process.
+Path : Start - (   ) - (   ) - (   ) - End.
+-&gt; S_21 - S_12 - S_13
+
+1. What is the time of this process?
+Time : (     )
+-&gt; 22
+</pre>
+:ET

@@ -1,0 +1,71 @@
+I"�<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">KAIST 산업및시스템공학과 문일철_ 데이터 구조 및 분석 수업을 참고하여 작성하였습니다</span></p>
+<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">ch_3_3 Linked List I</span></p>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>정의</title>
+</head>
+<body>
+
+<pre>
+</pre>
+
+<p><span style="background: linear-gradient(to right, #ffa7a3, #5673bd); padding: 0.43em 1em; font-size: 19px; border-radius: 3px; color: #ffffff;">Linked List I</span></p>
+
+<pre>
+1. Assignment and Equivalence
+    : One variable's value is changed
+    : == checks the equivalence of two referenced values
+    : is checks the equivalence of two referenced objects's IDs
+
+2. Basic structure : singly linked list
+    : construct a singly linked list with nodes and reference
+    : A node consists of
+        - A variable to hold a reference to its next node
+        - A variable to hold a reference to ist value object
+    : Special nodes Heand and Tail
+        - You can construct the singly linked list without them
+        - But, using them makes serach, insert and delete more convenient
+    : Generally, requires more coding than array
+
+3. Implementation of Node class
+    : Member variables
+        - variable to reference the next node
+        - variable to hold a value object
+        - variable to check whether it is a head or not
+        - variable to check whether it is a tail or not
+    : Member functions
+        - various set/get methods
+</pre>
+</body>
+</html>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Node</span> <span class="p">:</span>
+    <span class="n">nodeNext</span> <span class="o">=</span> <span class="s">''</span>
+    <span class="n">objValue</span> <span class="o">=</span> <span class="s">''</span>
+    <span class="n">binHead</span> <span class="o">=</span> <span class="bp">False</span>
+    <span class="n">binTail</span> <span class="o">=</span> <span class="bp">False</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">objValue</span> <span class="o">=</span> <span class="s">''</span><span class="p">,</span> <span class="n">nodeNext</span> <span class="o">=</span> <span class="s">''</span><span class="p">,</span><span class="n">binHead</span> <span class="o">=</span> <span class="bp">False</span><span class="p">,</span> <span class="n">binTail</span> <span class="o">=</span> <span class="bp">False</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">nodeNext</span> <span class="o">=</span> <span class="n">nodeNext</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">objValue</span> <span class="o">=</span> <span class="n">objValue</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">binHead</span> <span class="o">=</span> <span class="n">binHead</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">binTail</span> <span class="o">=</span> <span class="n">binTail</span>
+    <span class="k">def</span> <span class="nf">getValue</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">objValue</span>
+    <span class="k">def</span> <span class="nf">setValue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">objValue</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">objValue</span> <span class="o">=</span> <span class="n">objValue</span>
+    <span class="k">def</span> <span class="nf">getNext</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">nodeNext</span>
+    <span class="k">def</span> <span class="nf">setNext</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nodeNext</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">nodeNext</span> <span class="o">=</span> <span class="n">nodeNext</span>
+    <span class="k">def</span> <span class="nf">isHead</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">binHead</span>
+    <span class="k">def</span> <span class="nf">isTail</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">binTail</span>
+
+<span class="n">node1</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="n">objValue</span><span class="o">=</span><span class="s">'a'</span><span class="p">)</span>
+<span class="n">nodeTail</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="n">binTail</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
+<span class="n">nodeHead</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="n">binHead</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span> <span class="n">nodeNext</span> <span class="o">=</span> <span class="n">node1</span><span class="p">)</span>
+</code></pre></div></div>
+:ET

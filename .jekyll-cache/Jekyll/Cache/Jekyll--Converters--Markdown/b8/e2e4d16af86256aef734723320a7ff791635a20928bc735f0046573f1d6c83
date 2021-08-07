@@ -1,0 +1,85 @@
+I"�<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">java 입문 수업(생활코딩) 수업을 참고하여 작성하였습니다</span></p>
+<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">JAVA_주석과 세미콜론</span></p>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>정의</title>
+</head>
+<body>
+
+<pre>
+</pre>
+
+<p><span style="background: linear-gradient(to right, #ffa7a3, #5673bd); padding: 0.43em 1em; font-size: 19px; border-radius: 3px; color: #ffffff;">주석과 세미콜론</span></p>
+
+<pre>
+1. 주석
+   - 주석(comment)은 로직에 대한 설명이나 코드를 비활성화 할 때 사용한다
+   - 주석은 프로그래밍적으로 해석되지 않는다
+  1) 한줄 주석
+</pre>
+</body>
+</html>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">// 두개의 변수가 같은 데이터 타입 일 때 아래와 같이 코드를 작성한다.</span>
+    <span class="nc">String</span> <span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<pre>
+  2) 여러줄 주석
+</pre>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+    <span class="nc">String</span> <span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="o">;</span>
+    <span class="cm">/*
+    a = "coding";
+    b = "everybody";
+    System.out.println(a+b);
+    */</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<pre>
+  3) JavaDoc 주석
+    - /**로 시작하는 주석은 JavaDoc 주석이라고 해서 자바의 문서를 만들 때 사용
+</pre>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
+ * Prints an integer and then terminate the line.  This method behaves as
+ * though it invokes &lt;code&gt;{@link #print(int)}&lt;/code&gt; and then
+ * &lt;code&gt;{@link #println()}&lt;/code&gt;.
+ *
+ * @param x  The &lt;code&gt;int&lt;/code&gt; to be printed.
+ */</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">println</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">synchronized</span> <span class="o">(</span><span class="k">this</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">print</span><span class="o">(</span><span class="n">x</span><span class="o">);</span>
+        <span class="n">newLine</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<pre>
+2. 세미콜론
+   - 문장(statement)의 끝을 의미한다
+   - 자바에서는 문장의 끝에 세미콜론을 사용하지 않으면 
+      컴파일 에러가 발생한다
+   - 세미콜론을 이용하면 여러개의 문장을
+      한줄에 표현할 수 있다
+</pre>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// assignment statement</span>
+<span class="n">aValue</span> <span class="o">=</span> <span class="mf">8933.234</span><span class="o">;</span>
+<span class="c1">// increment statement</span>
+<span class="n">aValue</span><span class="o">++;</span>
+<span class="c1">// method invocation statement</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Hello World!"</span><span class="o">);</span>
+<span class="c1">// object creation statement</span>
+<span class="nc">Bicycle</span> <span class="n">myBike</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Bicycle</span><span class="o">();</span>
+<span class="c1">// 한줄로 여러개 문장 표현</span>
+<span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">100</span><span class="o">;</span> <span class="kt">double</span> <span class="n">b</span> <span class="o">=</span> <span class="mf">10.1</span><span class="o">;</span>
+</code></pre></div></div>
+:ET

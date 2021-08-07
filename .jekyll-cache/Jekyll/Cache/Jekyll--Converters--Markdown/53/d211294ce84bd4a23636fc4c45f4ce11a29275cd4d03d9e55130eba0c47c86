@@ -1,0 +1,41 @@
+I"U<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">KAIST 산업및시스템공학과 문일철_ 데이터 구조 및 분석 수업을 참고하여 작성하였습니다</span></p>
+<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">ch_3_1 Abstract Data Types</span></p>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>정의</title>
+</head>
+<body>
+
+<pre>
+</pre>
+
+<p><span style="background: linear-gradient(to right, #ffa7a3, #5673bd); padding: 0.43em 1em; font-size: 19px; border-radius: 3px; color: #ffffff;">Abstract Data Types</span></p>
+
+<pre>
+1. Data structures : linked list, stack, queue (선형적)
+* Objectivs are . .
+    - abstract data types의 정의로 이해
+    - how references work 로 동작하는지 이해
+    - linked list, stack, queue 이해해야됨ㅁ
+        - signly linked list, doubly linked list . .
+        - able to implement a stack and queue
+    - linked list, stack, queue management의 절차 이해
+        - insert, delete, search
+        - able to estimate the number of steps 
+        for inserts, deletes, searches
+
+1. Array for List
+   : line up ! (선형)
+
+2. Abstract Data Types
+   : an abstraction(추상화) of a data structure 
+   - data stored
+   - operations on the data
+   - Error conditions associated with operation
+   : Data 
+</pre>
+</body>
+</html>
+:ET

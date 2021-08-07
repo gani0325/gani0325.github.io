@@ -1,0 +1,197 @@
+I"�S<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">혼자공부하는머신러닝+딥러닝 수업을 참고하여 작성하였습니다</span></p>
+<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">5_3_트리의 앙상블</span></p>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>정의</title>
+</head>
+<body>
+
+<pre>
+</pre>
+
+<p><span style="background: linear-gradient(to right, #ffa7a3, #5673bd); padding: 0.43em 1em; font-size: 19px; border-radius: 3px; color: #ffffff;">트리의 앙상블</span></p>
+
+<pre>
+1. 정형 데이터와 비정형 데이터
+   - 정형 데이터 : 어떤 구조로 되어있다
+                 : CSV, 데이터베이스, 엑셀에 저장
+   - 비정형 데이터 : 위로 표현되기 어려운 것
+   * 앙상블 학습
+      : 정형 데이터르 다루는데 가장 뛰어난 성과를 내는 알고리즘 
+</pre>
+</body>
+</html>
+
+<pre>
+1. 랜덤 포레스트 훈련 방법
+    - 랜덤 샘플링 : 중복을 허용한 샘플링
+    - 각 트리를 훈련하기 위한 데이터를 랜덤하게 만든다
+    - 우리가 입력한 훈련 데이터에서 랜덤하게 샘플을 추출하여
+      훈련 데이터를 만든다
+    - 한 샘플이 중복되어 추출될 수 있다
+    - 훈련세트 과대적합 막아주고
+    - 검증, 테스트 세트에서 안정적인 성능 얻는다
+    - 부트스트랩 샘플
+        : 훈련세트의 크기와 같은 샘가
+        : 데이터 세트에서 중복을 허용하여 데이터 샘플링 
+    - OOB
+        : 부트스트랩에서 포함되지않고 남는 샘플
+</pre>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">wine</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">'https://bit.ly/wine-date'</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">wine</span><span class="p">[[</span><span class="s">'alcohol'</span><span class="p">,</span><span class="s">'sugar'</span><span class="p">,</span><span class="s">'pH'</span><span class="p">]].</span><span class="n">to_numpy</span><span class="p">()</span>
+<span class="n">target</span> <span class="o">=</span> <span class="n">wine</span><span class="p">[</span><span class="s">'class'</span><span class="p">].</span><span class="n">to_numpy</span><span class="p">()</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="n">train_input</span><span class="p">,</span> <span class="n">test_input</span><span class="p">,</span> <span class="n">train_target</span><span class="p">,</span> <span class="n">test_target</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">test_size</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span> <span class="o">=</span> <span class="mi">42</span><span class="p">)</span>
+<span class="c1"># test_size -&gt; test의 사이즈 (20%)
+</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">cross_validate</span>
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestClassifier</span>
+
+<span class="n">rf</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">n_jobs</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">random_state</span> <span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">scores</span> <span class="o">=</span> <span class="n">cross_validate</span><span class="p">(</span><span class="n">rf</span><span class="p">,</span> <span class="n">train_input</span><span class="p">,</span> <span class="n">train_target</span><span class="p">,</span>
+<span class="n">return_train_score</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span> <span class="n">n_jobs</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">mean</span><span class="p">(</span><span class="n">scores</span><span class="p">[</span><span class="s">'train_score'</span><span class="p">]),</span> <span class="n">np</span><span class="p">.</span><span class="n">mean</span><span class="p">(</span><span class="n">score</span><span class="p">[</span><span class="s">'test_score'</span><span class="p">]))</span>
+<span class="c1"># 0.9973541965122431 0.8574181117533719
+</span>
+<span class="n">rf</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_input</span><span class="p">,</span> <span class="n">train_target</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">rf</span><span class="p">.</span><span class="n">feature_importances_</span><span class="p">)</span>
+<span class="c1"># [0.23167441 0.50039841 0.26792718]
+# [알코올 도수, 당도, pH]
+# 당도 중요소 감소, 알코올, pH 증가
+</span>
+<span class="c1"># OOB
+</span><span class="n">rf</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">oob_score</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span> <span class="n">n_jobs</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">random_state</span> <span class="o">=</span> <span class="mi">42</span><span class="p">)</span>
+<span class="n">rf</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_input</span><span class="p">,</span> <span class="n">train_target</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">rf</span><span class="p">.</span><span class="n">oob_score_</span><span class="p">)</span>
+<span class="c1"># 0.8934000384837406
+</span></code></pre></div></div>
+
+<pre>
+2. 엑스트라 트리
+    - 랜덤 포레스트 보다 빠르다
+    - 노드분할 무작위
+    - 부트스트랩 TOAVMF X
+</pre>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">ExtraTreesClassifier</span>
+
+<span class="n">et</span> <span class="o">=</span> <span class="n">ExtraTreesClassifier</span><span class="p">(</span><span class="n">n_jobs</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">random_state</span> <span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">scores</span> <span class="o">=</span> <span class="n">cross_validate</span><span class="p">(</span><span class="n">et</span><span class="p">,</span> <span class="n">train_input</span><span class="p">,</span> <span class="n">train_target</span><span class="p">,</span>
+<span class="n">return_train_score</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span> <span class="n">n_jobs</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">mean</span><span class="p">(</span><span class="n">scores</span><span class="p">[</span><span class="s">'train_score'</span><span class="p">]),</span> <span class="n">np</span><span class="p">.</span><span class="n">mean</span><span class="p">(</span><span class="n">score</span><span class="p">[</span><span class="s">'test_score'</span><span class="p">]))</span>
+<span class="c1"># 0.9974503966084433 0.8574181117533719
+</span>
+<span class="n">et</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_input</span><span class="p">,</span> <span class="n">train_target</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">et</span><span class="p">.</span><span class="n">feature_importances_</span><span class="p">)</span>
+<span class="c1"># [0.20183568 0.52242907 0.27573525]
+</span></code></pre></div></div>
+
+<pre>
+3. 그레디언트 부스팅  
+    - 깊이가 얕은 결정 트리를 사용하여 이전 트리의 오차를 보완하는 방식
+    - 과대적합에 강하고 일반적으로 높은 일반화 성능 기대
+    - 경사하강법 사용 (분류에서 로지스틱 손실함수)
+                      (회귀에서 평균 제곱오차함수) 
+</pre>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">GradientBoostingClassifier</span>
+
+<span class="n">gb</span> <span class="o">=</span> <span class="n">GradientBoostingClassifier</span><span class="p">(</span><span class="n">random_state</span> <span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">scores</span> <span class="o">=</span> <span class="n">cross_validate</span><span class="p">(</span><span class="n">gb</span><span class="p">,</span> <span class="n">train_input</span><span class="p">,</span> <span class="n">train_target</span><span class="p">,</span> <span class="n">return_train_score</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span> <span class="n">n_jobs</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">mean</span><span class="p">(</span><span class="n">scores</span><span class="p">[</span><span class="s">'train_score'</span><span class="p">]),</span> <span class="n">np</span><span class="p">.</span><span class="n">mean</span><span class="p">(</span><span class="n">scores</span><span class="p">[</span><span class="s">'test_score'</span><span class="p">]))</span>
+<span class="c1"># 0.8881086892152563 0.8720430147331015
+</span>
+<span class="n">gb</span> <span class="o">=</span> <span class="n">GradientBoostingClassifier</span><span class="p">(</span><span class="n">n_estimators</span> <span class="o">=</span> <span class="mi">500</span><span class="p">,</span> <span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span> <span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">scores</span> <span class="o">=</span> <span class="n">cross_validate</span><span class="p">(</span><span class="n">gb</span><span class="p">,</span> <span class="n">train_input</span><span class="p">,</span> <span class="n">train_target</span><span class="p">,</span> <span class="n">return_train_score</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span> <span class="n">n_jobs</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">mean</span><span class="p">(</span><span class="n">scores</span><span class="p">[</span><span class="s">'train_score'</span><span class="p">]),</span> <span class="n">np</span><span class="p">.</span><span class="n">mean</span><span class="p">(</span><span class="n">scores</span><span class="p">[</span><span class="s">'test_score'</span><span class="p">]))</span>
+<span class="c1"># 0.9464595437171814 0.8780082549788999
+</span>
+<span class="c1"># 특성 중요도
+</span><span class="n">gb</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_input</span><span class="p">,</span> <span class="n">train_target</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">gb</span><span class="p">.</span><span class="n">feature_importances_</span><span class="p">)</span>
+<span class="c1"># [0.15872278 0.68010884 0.16116839]
+</span></code></pre></div></div>
+
+<pre>
+3. 히스토그램 기반 그레이디언트 부스팅
+    : 입력 특성을 256개로 나눈다
+    : 노드 분할 할 때 최적의 분할 매우 빠르게 찾을 수 있다
+    : 256개의 구간 중에서 하나 떼고 누락된 값을 위해서 사용
+    : 전처리할 필요가 없다  
+</pre>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.experimental</span> <span class="kn">import</span> <span class="n">enable_hist_gradient_boosting</span>
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">HistGradientBoostingClassifier</span>
+
+<span class="n">hgb</span> <span class="o">=</span> <span class="n">HistGradientBoostingClassifier</span><span class="p">(</span><span class="n">random_state</span> <span class="o">=</span> <span class="mi">42</span><span class="p">)</span>
+<span class="n">scores</span> <span class="o">=</span> <span class="n">cross_validate</span><span class="p">(</span><span class="n">hgb</span><span class="p">,</span> <span class="n">train_input</span><span class="p">,</span> <span class="n">train_target</span><span class="p">,</span> <span class="n">return_train_score</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span> <span class="n">n_jobs</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">mean</span><span class="p">(</span><span class="n">scores</span><span class="p">[</span><span class="s">'train_score'</span><span class="p">]),</span> <span class="n">np</span><span class="p">.</span><span class="n">mean</span><span class="p">(</span><span class="n">score</span><span class="p">[</span><span class="s">'test_score'</span><span class="p">]))</span>
+<span class="c1"># 0.9321723946453317 0.8574181117533719
+</span>
+<span class="kn">from</span> <span class="nn">sklearn.inspection</span> <span class="kn">import</span> <span class="n">permutation_importance</span>
+<span class="c1"># permutation_importance : 반복하여 얻은 특성중요도,
+# 평균, 표준 편차 담고 있다
+</span><span class="n">hgb</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_input</span><span class="p">,</span> <span class="n">train_target</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">permutation_importance</span><span class="p">(</span><span class="n">hgb</span><span class="p">,</span> <span class="n">train_input</span><span class="p">,</span> <span class="n">train_target</span><span class="p">,</span> <span class="n">n_repeats</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+                                <span class="n">random_state</span> <span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">n_jobs</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="n">importances_mean</span><span class="p">)</span>
+<span class="c1"># [0.08876275 0.23438522 0.08027708]
+</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">permutation_importance</span><span class="p">(</span><span class="n">hgb</span><span class="p">,</span> <span class="n">test_input</span><span class="p">,</span> <span class="n">test_target</span><span class="p">,</span> <span class="n">n_repeats</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+                                <span class="n">random_state</span> <span class="o">=</span> <span class="mi">42</span><span class="p">,</span> <span class="n">n_jobs</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="n">importances_mean</span><span class="p">)</span>
+<span class="n">hgb</span><span class="p">.</span><span class="n">score</span><span class="p">(</span><span class="n">test_input</span><span class="p">,</span> <span class="n">test_target</span><span class="p">)</span>
+<span class="c1"># [0.05969231 0.20238462 0.049     ]
+# 0.8723076923076923
+</span></code></pre></div></div>
+
+<pre>
+4. Permutation Importance (치환 중요도)  
+</pre>
+
+<pre>
+5. XGBoost vs LightGBM
+</pre>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># XGBoost
+</span><span class="kn">from</span> <span class="nn">xgboost</span> <span class="kn">import</span> <span class="n">XGBClassifier</span>
+
+<span class="n">xgb</span> <span class="o">=</span> <span class="n">XGBClassifier</span><span class="p">(</span><span class="n">tree_method</span> <span class="o">=</span> <span class="s">'hist'</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span> <span class="mi">42</span><span class="p">)</span>
+<span class="n">scores</span> <span class="o">=</span> <span class="n">cross_validate</span><span class="p">(</span><span class="n">xgb</span><span class="p">,</span> <span class="n">train_input</span><span class="p">,</span> <span class="n">train_target</span><span class="p">,</span> <span class="n">return_train_score</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span> <span class="n">n_jobs</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">mean</span><span class="p">(</span><span class="n">scores</span><span class="p">[</span><span class="s">'train_score'</span><span class="p">]),</span> <span class="n">np</span><span class="p">.</span><span class="n">mean</span><span class="p">(</span><span class="n">scores</span><span class="p">[</span><span class="s">'test_score'</span><span class="p">]))</span>
+<span class="c1"># 0.8824322471423747 0.8726214185237284
+</span>
+<span class="c1"># LightGBM
+</span><span class="kn">from</span> <span class="nn">lightgbm</span> <span class="kn">import</span> <span class="n">LGBMClassifier</span>
+
+<span class="n">lgb</span> <span class="o">=</span> <span class="n">LGBMClassifier</span><span class="p">(</span><span class="n">random_state</span> <span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">scores</span> <span class="o">=</span> <span class="n">cross_validate</span><span class="p">(</span><span class="n">lgb</span><span class="p">,</span> <span class="n">train_input</span><span class="p">,</span> <span class="n">train_target</span><span class="p">,</span> <span class="n">return_train_score</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">mean</span><span class="p">(</span><span class="n">scores</span><span class="p">[</span><span class="s">'train_score'</span><span class="p">]),</span> <span class="n">np</span><span class="p">.</span><span class="n">mean</span><span class="p">(</span><span class="n">scores</span><span class="p">[</span><span class="s">'test_score'</span><span class="p">]))</span>
+<span class="c1"># 0.9338079582727165 0.8789710890649293
+</span></code></pre></div></div>
+
+<pre>
+6. 앙상블 보고서
+    : 앙상블 학습은 정형 데이터에서 가장 뛰어난 성능을 내는
+    머신러닝 알고리즘 중 하나
+    
+    * 사이킷런
+      - 랜덤포레스트 : 부트스트랩 샘플 사용, 
+        대표 앙상블 학습 알고리즘
+      - 엑스트라 트리 : 결정 트리의 노드를 랜덤하게 분할
+      - 그레이디언트 부스팅 : 이전 트리의 손실을 
+        보완하는 식으로 얕은 결정트리를 연속하여 추가
+      - 히스토그램 기반 그레이디언트 부스팅 : 훈련 데이터를
+        256개 정수 구간으로 나누어 빠르고 높은 성능 냄
+
+    * 그외 라이브러리
+      - XGBoost
+      - LightGBM
+</pre>
+
+:ET

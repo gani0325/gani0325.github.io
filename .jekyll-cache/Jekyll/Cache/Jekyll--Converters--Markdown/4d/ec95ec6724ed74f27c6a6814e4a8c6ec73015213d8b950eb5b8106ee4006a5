@@ -1,0 +1,48 @@
+I"T<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">KAIST 산업및시스템공학과 문일철_ 데이터 구조 및 분석 수업을 참고하여 작성하였습니다</span></p>
+<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">ch_5_4 Quiz5</span></p>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>정의</title>
+</head>
+<body>
+
+<pre>
+</pre>
+
+<p><span style="background: linear-gradient(to right, #ffa7a3, #5673bd); padding: 0.43em 1em; font-size: 19px; border-radius: 3px; color: #ffffff;">Quiz5</span></p>
+
+<pre>
+1. The goal of nemerical modeling is converting 
+    the real word problems into formula.
+- T
+
+2. The real-world problem is hard to convert 
+    as a well-defined programming language.
+- T
+
+3. The model is a simplification of
+   the real world problems.
+- T
+
+4. Agent Based Models is included 
+   in simulation modeling.
+- T
+
+5. By making and operating the equation 
+   through a computer program, we predict how the real world 
+   problem will change in the future. 
+   This is called _______________________.
+
+
+6. SIR model three types of population condition,
+    Susceptible, Infectious, Recovered state.
+    Line 1 indicate the ____ state.
+- Recovered
+</pre>
+</body>
+</html>
+
+<p><img src="https://cphinf.pstatic.net/mooc/20190924_186/1569291405714vSqpf_PNG/Quiz_5.PNG" /></p>
+:ET

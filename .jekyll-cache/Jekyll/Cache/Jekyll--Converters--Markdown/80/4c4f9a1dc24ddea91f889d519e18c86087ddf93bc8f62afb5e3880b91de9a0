@@ -1,0 +1,34 @@
+I"x<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">java 입문 수업(생활코딩) 수업을 참고하여 작성하였습니다</span></p>
+<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">JAVA_데이터타입 (1/2) : 데이터의 크기</span></p>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>정의</title>
+</head>
+<body>
+
+<pre>
+</pre>
+
+<p><span style="background: linear-gradient(to right, #ffa7a3, #5673bd); padding: 0.43em 1em; font-size: 19px; border-radius: 3px; color: #ffffff;">데이터타입 (1/2) : 데이터의 크기</span></p>
+
+<pre>
+1. 데이터 타입
+    - 컴퓨터에 저장되는 정보의 가장 작은 단위는 bit다
+    - 컴퓨터를 0과 1로 이루어졌다
+    - 이 0과 1이 bit다
+
+  1) 데이터의 크기
+8 bit (비트)	1 byte
+1024 byte (바이트)	1 kilobyte
+1024 kilobyte (킬로바이트)	1 megabyte
+1024 megabyte (메가바이트)	1 gigabyte
+1024 gigabyte  (기가바이트)	1 terabyte
+1024 terabyte (테라바이트)	1 petabyte
+1024 petabyte (페타바이트)	1 exabyte
+1024 exabyte (엑사바이트)	1 zettabyte
+</pre>
+</body>
+</html>
+:ET

@@ -1,0 +1,197 @@
+I"�S<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">혼자공부하는머신러닝+딥러닝 수업을 참고하여 작성하였습니다</span></p>
+<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">5_2_교차 검증과 그리드 서치</span></p>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>정의</title>
+</head>
+<body>
+
+<pre>
+</pre>
+
+<p><span style="background: linear-gradient(to right, #ffa7a3, #5673bd); padding: 0.43em 1em; font-size: 19px; border-radius: 3px; color: #ffffff;">교차 검증과 그리드 서치</span></p>
+
+<pre>
+1. 검증세트
+   : 테스트 세트를 사용하지 않고 이를 측정하는 방법
+   : 훈련세트를 또 나누기
+   : 전체 데이터 = 훈련 60 + 검증 20 + 테스트 20
+</pre>
+</body>
+</html>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+<span class="n">wine</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">'https://bit.ly/wine-date'</span><span class="p">)</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">wine</span><span class="p">[[</span><span class="s">'alcohol'</span><span class="p">,</span><span class="s">'sugar'</span><span class="p">,</span><span class="s">'pH'</span><span class="p">]].</span><span class="n">to_numpy</span><span class="p">()</span>
+<span class="n">target</span> <span class="o">=</span> <span class="n">wine</span><span class="p">[</span><span class="s">'class'</span><span class="p">].</span><span class="n">to_numpy</span><span class="p">()</span>
+
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="n">train_input</span><span class="p">,</span> <span class="n">test_input</span><span class="p">,</span> <span class="n">train_target</span><span class="p">,</span> <span class="n">test_target</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">test_size</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span> <span class="o">=</span> <span class="mi">42</span><span class="p">)</span>
+<span class="c1"># test_size -&gt; test의 사이즈 (20%)
+</span>
+<span class="n">sub_input</span><span class="p">,</span> <span class="n">val_input</span><span class="p">,</span> <span class="n">sub_target</span><span class="p">,</span> <span class="n">val_target</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">train_input</span><span class="p">,</span> <span class="n">train_target</span><span class="p">,</span> <span class="n">test_size</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span> <span class="o">=</span> <span class="mi">42</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">sub_input</span><span class="p">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">val_input</span><span class="p">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="c1"># (4157, 3) (1040, 3)
+</span>
+<span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="kn">import</span> <span class="n">DecisionTreeClassifier</span>
+<span class="n">dt</span> <span class="o">=</span> <span class="n">DecisionTreeClassifier</span><span class="p">(</span><span class="n">random_state</span> <span class="o">=</span> <span class="mi">42</span><span class="p">)</span>
+<span class="n">dt</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">sub_input</span><span class="p">,</span> <span class="n">sub_target</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">dt</span><span class="p">.</span><span class="n">score</span><span class="p">(</span><span class="n">sub_input</span><span class="p">,</span> <span class="n">sub_target</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">dt</span><span class="p">.</span><span class="n">score</span><span class="p">(</span><span class="n">val_input</span><span class="p">,</span> <span class="n">val_target</span><span class="p">))</span>
+<span class="c1"># 0.9971133028626413
+# 0.864423076923077
+</span></code></pre></div></div>
+
+<pre>
+2. 교차검증
+    : 검증 세트를 떼어 내어 평가하는 과정을 여러번 반복
+    : 이 점수를 평균하여 최종 검증 점수 얻기
+    * k-폴드 교차 검증
+        : k 부분으로 나누어서 교차 검증 수행
+</pre>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">cross_validate</span>
+<span class="n">scores</span> <span class="o">=</span> <span class="n">cross_validate</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="n">train_input</span><span class="p">,</span> <span class="n">train_target</span><span class="p">)</span>
+<span class="c1"># cross_validate : 먼저 평가할 모델 객체를 첫번째
+# 매개변수로 전달, 앞에서처럼 직접 검증 세트 떼어내지 않고
+# 훈련 세트 전체를 cross_validate 에 전달
+</span><span class="k">print</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span>
+<span class="c1"># {'fit_time': array([0.00818205, 0.00707316, 0.00745201, 0.00763822, 0.00757003]), 'score_time': array([0.00083613, 0.00069308, 0.00074124, 0.00078893, 0.00074649]), 'test_score': array([0.86923077, 0.84615385, 0.87680462, 0.84889317, 0.83541867])}
+</span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="k">print</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">mean</span><span class="p">(</span><span class="n">scores</span><span class="p">[</span><span class="s">'test_score'</span><span class="p">]))</span>
+<span class="c1"># 0.855300214703487
+</span></code></pre></div></div>
+
+<pre>
+3. 분할기(splitter)를 사용한 교차검증
+    : cross_validate는 회귀모델 경우 KFold 분할기
+    : 분류모델 경우 타깃클래스를 골고루 나누는 StratifiedKFold 사용
+</pre>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">StratifiedKFold</span>
+
+<span class="c1"># 1 StratifiedKFold
+</span><span class="n">scores</span> <span class="o">=</span> <span class="n">cross_validate</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="n">train_input</span><span class="p">,</span> <span class="n">train_target</span><span class="p">,</span> <span class="n">cv</span> <span class="o">=</span> <span class="n">StratifiedKFold</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">mean</span><span class="p">(</span><span class="n">scores</span><span class="p">[</span><span class="s">'test_score'</span><span class="p">]))</span>
+<span class="c1"># 0.855300214703487
+</span>
+<span class="c1"># 2 splitter
+</span><span class="n">splitter</span> <span class="o">=</span> <span class="n">StratifiedKFold</span><span class="p">(</span><span class="n">n_splits</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">shuffle</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span> <span class="n">random_state</span> <span class="o">=</span> <span class="mi">42</span><span class="p">)</span>
+<span class="n">scores</span> <span class="o">=</span> <span class="n">cross_validate</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="n">train_input</span><span class="p">,</span> <span class="n">train_target</span><span class="p">,</span> <span class="n">cv</span> <span class="o">=</span> <span class="n">splitter</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">mean</span><span class="p">(</span><span class="n">scores</span><span class="p">[</span><span class="s">'test_score'</span><span class="p">]))</span>
+<span class="c1"># 0.8574181117533719
+</span></code></pre></div></div>
+
+<pre>
+4. 그리드 서치
+    : 하이퍼파라미터 탐색과 교차 검증 한번에 수행
+    * 하이퍼파라미터
+        : 사용자 지정 파라미터 
+    1) 먼저 탐색할 매개변수 지정
+    2) 훈련세트에서 그리드 서치 수행, 최상의 평균 검증점수가
+    나오는 매개변수 조합 찾기 (이 조합은 그리드 서치 객체에 저장)
+    3) 그리드 서치는 최상의 매개변수에서 전체 훈련세트를
+    사용해 최종 모델 훈련 (그리드 서치 객체에 저장)
+    * 매개변수
+        - min_impurity_decrease : 노드 분할하기 위한
+                                불순도 감소 최소량 지정 
+        - max_depth : 트리의 깊이 제한
+        - min_sample_split : 노드 나누기 위한 최소샘플수 고르기
+</pre>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">GridSearchCV</span>
+
+<span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s">'min_impurity_decrease'</span> <span class="p">:</span> <span class="p">[</span><span class="mf">0.0001</span><span class="p">,</span> <span class="mf">0.0002</span><span class="p">,</span> <span class="mf">0.0003</span><span class="p">,</span> <span class="mf">0.0004</span><span class="p">,</span> <span class="mf">0.0005</span><span class="p">]}</span>
+
+<span class="n">gs</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">DecisionTreeClassifier</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">),</span> <span class="n">params</span><span class="p">,</span> <span class="n">n_jobs</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">gs</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_input</span><span class="p">,</span> <span class="n">train_target</span><span class="p">)</span>
+
+<span class="n">dt</span> <span class="o">=</span> <span class="n">gs</span><span class="p">.</span><span class="n">best_estimator_</span>
+<span class="k">print</span><span class="p">(</span><span class="n">dt</span><span class="p">.</span><span class="n">score</span><span class="p">(</span><span class="n">train_input</span><span class="p">,</span><span class="n">train_target</span><span class="p">))</span>
+<span class="c1"># 0.9615162593804117
+</span>
+<span class="k">print</span><span class="p">(</span><span class="n">gs</span><span class="p">.</span><span class="n">best_params_</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">gs</span><span class="p">.</span><span class="n">cv_results_</span><span class="p">[</span><span class="s">'mean_test_score'</span><span class="p">])</span>
+<span class="c1"># {'min_impurity_decrease': 0.0001}
+# [0.86819297 0.86453617 0.86492226 0.86780891 0.86761605]
+</span>
+<span class="c1">#best_index = np.argmax(gs.cv_results_['mean_test_score'])
+</span><span class="k">print</span><span class="p">(</span><span class="n">gs</span><span class="p">.</span><span class="n">cv_results_</span><span class="p">[</span><span class="s">'params'</span><span class="p">][</span><span class="n">best_index</span><span class="p">])</span>
+<span class="c1"># {'min_impurity_decrease': 0.0001}
+</span></code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s">'min_impurity_decrease'</span><span class="p">:</span><span class="n">np</span><span class="p">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.0001</span><span class="p">,</span> <span class="mf">0.001</span><span class="p">,</span> <span class="mf">0.0001</span><span class="p">),</span>
+          <span class="s">'max_depth'</span> <span class="p">:</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span>
+          <span class="s">'min_samples_split'</span> <span class="p">:</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
+          <span class="p">}</span>
+
+<span class="n">gs</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">DecisionTreeClassifier</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">),</span> <span class="n">params</span><span class="p">,</span> <span class="n">n_jobs</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">gs</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_input</span><span class="p">,</span> <span class="n">train_target</span><span class="p">)</span>
+<span class="c1"># 최상의 매개변수 조합
+</span><span class="k">print</span><span class="p">(</span><span class="n">gs</span><span class="p">.</span><span class="n">best_params_</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nb">max</span><span class="p">(</span><span class="n">gs</span><span class="p">.</span><span class="n">cv_results_</span><span class="p">[</span><span class="s">'mean_test_score'</span><span class="p">]))</span>
+<span class="c1"># {'max_depth': 14, 'min_impurity_decrease': 0.0004, 'min_samples_split': 12}
+# 0.8683865773302731
+</span>
+<span class="c1"># 최상의 교차 검증 점수
+</span><span class="k">print</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nb">max</span><span class="p">(</span><span class="n">gs</span><span class="p">.</span><span class="n">cv_results_</span><span class="p">[</span><span class="s">'mean_test_score'</span><span class="p">]))</span>
+<span class="c1"># 0.8683865773302731
+</span></code></pre></div></div>
+
+<pre>
+5. 랜덤 서치
+    : 매개변수 값의 목록을 전달x
+    : 매개변수를 샘플링할 수 있는 확률 분포 객체 전달
+    - randint : 정수값 뽑기
+    - uniform : 실수값 뽑기
+        -&gt; 균등분포에서 샘플링한다
+</pre>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">uniform</span><span class="p">,</span> <span class="n">randint</span>
+
+<span class="n">rgen</span> <span class="o">=</span> <span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">rgen</span><span class="p">.</span><span class="n">rvs</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="c1"># array([3, 6, 4, 8, 6, 0, 6, 7, 5, 1])
+</span>
+<span class="n">np</span><span class="p">.</span><span class="n">unique</span><span class="p">(</span><span class="n">rgen</span><span class="p">.</span><span class="n">rvs</span><span class="p">(</span><span class="mi">1000</span><span class="p">),</span> <span class="n">return_counts</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
+<span class="c1"># (array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]),
+#  array([107, 104, 106, 107,  97,  82, 110,  89,  96, 102]))
+</span><span class="n">ugen</span> <span class="o">=</span> <span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ugen</span><span class="p">.</span><span class="n">rvs</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="c1"># array([0.3409424 , 0.39960849, 0.38990399, 0.10233974, 0.19886937,
+#        0.77002928, 0.40426844, 0.87554215, 0.19462306, 0.28794574])
+</span></code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s">'min_impurity_decrease'</span><span class="p">:</span> <span class="n">uniform</span><span class="p">(</span><span class="mf">0.0001</span><span class="p">,</span> <span class="mf">0.001</span><span class="p">),</span>
+          <span class="s">'max_depth'</span> <span class="p">:</span> <span class="n">randint</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">50</span><span class="p">),</span>
+          <span class="s">'min_samples_split'</span> <span class="p">:</span> <span class="n">randint</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">25</span><span class="p">),</span>
+          <span class="s">'min_samples_leaf'</span> <span class="p">:</span> <span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">25</span><span class="p">),</span>
+          <span class="p">}</span>
+
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">RandomizedSearchCV</span>
+<span class="n">gs</span> <span class="o">=</span> <span class="n">RandomizedSearchCV</span><span class="p">(</span><span class="n">DecisionTreeClassifier</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">),</span> <span class="n">params</span><span class="p">,</span>
+                        <span class="n">n_iter</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">n_jobs</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">random_state</span> <span class="o">=</span> <span class="mi">42</span><span class="p">)</span>
+<span class="n">gs</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_input</span><span class="p">,</span> <span class="n">train_target</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">gs</span><span class="p">.</span><span class="n">best_params_</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nb">max</span><span class="p">(</span><span class="n">gs</span><span class="p">.</span><span class="n">cv_results_</span><span class="p">[</span><span class="s">'mean_test_score'</span><span class="p">]))</span>
+<span class="c1"># {'max_depth': 39, 'min_impurity_decrease': 0.00034102546602601173, 'min_samples_leaf': 7, 'min_samples_split': 13}
+# 0.8695428296438884
+</span>
+<span class="n">dt</span> <span class="o">=</span> <span class="n">gs</span><span class="p">.</span><span class="n">best_estimator_</span>
+<span class="k">print</span><span class="p">(</span><span class="n">dt</span><span class="p">.</span><span class="n">score</span><span class="p">(</span><span class="n">test_input</span><span class="p">,</span> <span class="n">test_target</span><span class="p">))</span>
+<span class="c1"># 0.86
+</span></code></pre></div></div>
+
+<pre>
+6. 최적의 모델을 위한 하이퍼파라미터 탐색
+    1) GridSearchCV : 교차검증으로 하이퍼파라미터 탐색
+            최상 모델 찾은후 훈련세트 전체 사용해 최종모델 훈련 
+    2) RandomizedSearchCV : 교차검증으로 랜덤한 하이퍼파라미터 탐색
+            최상 모델 찾은후 훈련세트 전체 사용해 최종모델 훈련
+</pre>
+:ET

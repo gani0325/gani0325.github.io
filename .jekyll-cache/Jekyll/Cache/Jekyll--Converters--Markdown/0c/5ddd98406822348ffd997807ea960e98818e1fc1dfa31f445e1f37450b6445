@@ -1,0 +1,76 @@
+I"�<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">KAIST 산업및시스템공학과 문일철_ 데이터 구조 및 분석 수업을 참고하여 작성하였습니다</span></p>
+<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">ch_3_5 Stack</span></p>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>정의</title>
+</head>
+<body>
+
+<pre>
+</pre>
+
+<p><span style="background: linear-gradient(to right, #ffa7a3, #5673bd); padding: 0.43em 1em; font-size: 19px; border-radius: 3px; color: #ffffff;">Stack</span></p>
+
+<pre>
+1. Structure of Stack
+    : linear like linked lists (A variation of a singly linked list)
+    : Voluntarily giving up
+        - Access to the middle in the linked list
+        - Only accesses to the first instance in the list
+    : The first instance in the list 
+        = The top instacne in the stack
+    : is iserted or removed from the stack from one end called the 'top' of the stack
+    : is called Last-In-First-Out (LIFO)
+
+2. Operation of Stack
+    - Push
+        = Insert an instance at the fist in the linked list
+        = Put an instance at the top in the stack
+    - Pop
+        = Remove and return an instance at the fist in the linked list
+        = Remove and return an instance at the top in the stack
+
+3. Implementation of Stack
+    - Python code of a stack
+      - Utilizing a singly linked list
+      - To pop an instance (I retrieval count)
+      - To push an instnace (I retrieval count)
+</pre>
+</body>
+</html>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">edu.kaist.seslab.ie362.week3.SinglyLinkedList</span> <span class="kn">import</span> <span class="n">SinglyLinkedList</span>
+
+<span class="k">class</span> <span class="nc">Stack</span><span class="p">(</span><span class="nb">object</span><span class="p">)</span> <span class="p">:</span>
+    <span class="n">lstInstance</span> <span class="o">=</span> <span class="n">SinglyLinkedList</span><span class="p">()</span>
+    <span class="k">def</span> <span class="nf">pop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">lstInstance</span><span class="p">.</span><span class="n">removeAt</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">push</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">lstInstance</span><span class="p">.</span><span class="n">insertAt</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="n">stack</span> <span class="o">=</span>  <span class="n">Stack</span><span class="p">()</span>
+<span class="n">stack</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="s">'a'</span><span class="p">)</span>
+<span class="n">stack</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="s">'b'</span><span class="p">)</span>
+<span class="n">stack</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="s">'c'</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">stack</span><span class="p">.</span><span class="n">pop</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="n">stack</span><span class="p">.</span><span class="n">pop</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="n">stack</span><span class="p">.</span><span class="n">pop</span><span class="p">())</span>
+
+<span class="c1"># c
+# b
+# a
+</span></code></pre></div></div>
+
+<pre>
+4. Balancing Symbols
+    - Algorithm for the balanced symbol checking
+      - Mack an empty stack
+      - read symbols until end of formula
+        - if 여는 symbol 있으면 push
+        - if 닫는 symbol 있으면, if stack is empty 면 error
+    - At the end of the of formula if the stack is not empty report an error
+</pre>
+:ET

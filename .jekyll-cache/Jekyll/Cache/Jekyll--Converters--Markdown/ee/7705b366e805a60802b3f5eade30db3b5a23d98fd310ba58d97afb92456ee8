@@ -1,0 +1,144 @@
+I"�_<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">혼자공부하는머신러닝+딥러닝 수업을 참고하여 작성하였습니다</span></p>
+<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">4_2_확률적 경사 하강법 알아보기</span></p>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>정의</title>
+</head>
+<body>
+
+<pre>
+</pre>
+
+<p><span style="background: linear-gradient(to right, #ffa7a3, #5673bd); padding: 0.43em 1em; font-size: 19px; border-radius: 3px; color: #ffffff;">확률적 경사 하강법 알아보기</span></p>
+<pre>
+1. 확률적 경사 하강법 (Stochastic gradient descent)
+   : 훈련 세트에서 랜덤하게 하나의 샘플을 고르는 것
+   : 훈련 세트에서 샘플 하나씩 꺼내 손실 함수의 경사를 따라 최적의 모델을 찾는 알고리즘
+   : 훈련 데이터가 모두 준비되어 있지 않고 매일매일 업데이트 되어도 계속 이어갈 수 있다
+- 에포크 (Epoch)
+   : 전체 샘픙르 모두 사용하는 한 번 반복
+
+2. 미니배치 경사 하강법 (Mini-batch gradient descent)
+   : 샘플을 하나씩 사용하지 않고 여러 개를 사용
+
+3. 배치 경사 하강법 (Batch gradient descent)
+   : 한 번에 전체 샘플 사용
+   : 전체 데이터를 사용해서 가장 안정적인 방법이지만, 컴퓨터 자원 많이 사용
+
+4. 손실함수 (loss function)
+   : 나쁜 정도 측정 함수
+   : 어떤 문제에서 머신러닝 알고리즘이 얼마나 엉터리인지 측정하는 기준
+   : 값이 작을 수록 좋다
+   : 샘플 하나에 대한 손실 정의
+   : 정확도 X, 미분 가능 X
+   - 비용 함수(cost function)
+        : 훈련 세트에 있는 모든 샘플에 대한 손실 함수의 합
+   - 로지스틱 손실 함수
+        : 타깃 1일 때 -log(예측확률)
+        -&gt; 확률 1에서 멀어질수록 손실은 아주 큰 양수
+        -&gt; 확률 클수록 손실 작음
+        : 타깃 0일 때 -log(1-예측확률)
+        -&gt; 확률 0에서 멀어질수록 손실은 아주 큰 양수
+        -&gt; 확률 클수록 손실 큼
+
+5. 데이터 전처리
+</pre>
+</body>
+</html>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span> 
+<span class="n">fish</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">"http://bit.ly/fish_csv_data"</span><span class="p">)</span>
+<span class="n">fish</span><span class="p">.</span><span class="n">head</span><span class="p">()</span>
+
+<span class="n">fish_input</span> <span class="o">=</span> <span class="n">fish</span><span class="p">[[</span><span class="s">'Weight'</span><span class="p">,</span> <span class="s">'Length'</span><span class="p">,</span> <span class="s">'Diagonal'</span><span class="p">,</span> <span class="s">'Height'</span><span class="p">,</span> <span class="s">'Width'</span><span class="p">]].</span><span class="n">to_numpy</span><span class="p">()</span>
+<span class="n">fish_target</span> <span class="o">=</span> <span class="n">fish</span><span class="p">[</span><span class="s">'Species'</span><span class="p">].</span><span class="n">to_numpy</span><span class="p">()</span>
+
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="n">train_input</span><span class="p">,</span> <span class="n">test_input</span><span class="p">,</span> <span class="n">train_target</span><span class="p">,</span> <span class="n">test_target</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">fish_input</span><span class="p">,</span> <span class="n">fish_target</span><span class="p">,</span> <span class="n">random_state</span> <span class="o">=</span> <span class="mi">42</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="n">ss</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+<span class="n">ss</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_input</span><span class="p">)</span>
+<span class="n">train_scaled</span> <span class="o">=</span> <span class="n">ss</span><span class="p">.</span><span class="n">transform</span><span class="p">(</span><span class="n">train_input</span><span class="p">)</span>
+<span class="n">test_scaled</span> <span class="o">=</span> <span class="n">ss</span><span class="p">.</span><span class="n">transform</span><span class="p">(</span><span class="n">test_input</span><span class="p">)</span>
+</code></pre></div></div>
+
+<pre>
+6. SGDClassifier
+    : 머신러닝 모델이 아니고 머신러닝 모델을 훈련시켜 최적화하는 방법
+    : 어떤 손실함수를 최적화할지 지정해준다
+    - hinge loss
+        : loss의 매개변수 기본값은 hinge
+            (= support vector machine)
+</pre>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">SGDClassifier</span>
+
+<span class="n">sc</span> <span class="o">=</span> <span class="n">SGDClassifier</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span> <span class="s">"log"</span><span class="p">,</span> <span class="n">max_iter</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">random_state</span> <span class="o">=</span> <span class="mi">42</span><span class="p">)</span>
+            <span class="c1"># logictic loss function   # epoch    # random_seed
+</span><span class="n">sc</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_scaled</span><span class="p">,</span> <span class="n">train_target</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">sc</span><span class="p">.</span><span class="n">score</span><span class="p">(</span><span class="n">train_scaled</span><span class="p">,</span> <span class="n">train_target</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">sc</span><span class="p">.</span><span class="n">score</span><span class="p">(</span><span class="n">test_scaled</span><span class="p">,</span> <span class="n">test_target</span><span class="p">))</span>
+<span class="c1"># 0.773109243697479
+# 0.775
+</span><span class="n">sc</span><span class="p">.</span><span class="n">partial_fit</span><span class="p">(</span><span class="n">train_scaled</span><span class="p">,</span> <span class="n">train_target</span><span class="p">)</span>
+  <span class="c1"># 기존의 학습 내용 유지 !
+</span>  <span class="c1"># fit 은 이전 학습내용 버리기 ! 새로 학습 !
+</span><span class="k">print</span><span class="p">(</span><span class="n">sc</span><span class="p">.</span><span class="n">score</span><span class="p">(</span><span class="n">train_scaled</span><span class="p">,</span> <span class="n">train_target</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">sc</span><span class="p">.</span><span class="n">score</span><span class="p">(</span><span class="n">test_scaled</span><span class="p">,</span> <span class="n">test_target</span><span class="p">))</span>
+<span class="p">]</span>
+<span class="n">sc</span><span class="p">.</span><span class="n">partial_fit</span><span class="p">(</span><span class="n">train_scaled</span><span class="p">,</span> <span class="n">train_target</span><span class="p">)</span>
+  <span class="c1"># 기존의 학습 내용 유지 !
+</span>  <span class="c1"># fit 은 이전 학습내용 버리기 ! 새로 학습 !
+</span><span class="k">print</span><span class="p">(</span><span class="n">sc</span><span class="p">.</span><span class="n">score</span><span class="p">(</span><span class="n">train_scaled</span><span class="p">,</span> <span class="n">train_target</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">sc</span><span class="p">.</span><span class="n">score</span><span class="p">(</span><span class="n">test_scaled</span><span class="p">,</span> <span class="n">test_target</span><span class="p">))</span>
+<span class="c1"># 0.8151260504201681
+# 0.825
+</span></code></pre></div></div>
+
+<pre>
+7. 에포크와 과대/과소적합
+    : alpha(규제) 가 엄청 크면 과소적합
+    : alpha(규제) 가 엄청 작으면 과대적합
+    : 에포크 횟수가 적으면 모델이 훈련세트를 덜 훈련함
+    : -----------------------&gt; 에포크 증가
+    : 훈련세트 점수는 꾸준히 증가
+    : 테스트세트 점수는 어느순간 감소
+    (이 지점이 과대적합 시작 하는 곳)
+    - 조기 종료
+        : 과대적합 되기 전에 훈련 멈추기  
+</pre>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="n">sc</span> <span class="o">=</span> <span class="n">SGDClassifier</span><span class="p">(</span><span class="n">loss</span> <span class="o">=</span> <span class="s">"log"</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">train_score</span> <span class="o">=</span><span class="p">[]</span>
+<span class="n">test_score</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">classes</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">unique</span><span class="p">(</span><span class="n">train_target</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">300</span><span class="p">):</span>
+  <span class="n">sc</span><span class="p">.</span><span class="n">partial_fit</span><span class="p">(</span><span class="n">train_scaled</span><span class="p">,</span> <span class="n">train_target</span><span class="p">,</span> <span class="n">classes</span> <span class="o">=</span> <span class="n">classes</span><span class="p">)</span>
+  <span class="n">train_score</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">sc</span><span class="p">.</span><span class="n">score</span><span class="p">(</span><span class="n">train_scaled</span><span class="p">,</span> <span class="n">train_target</span><span class="p">))</span>
+  <span class="n">test_score</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">sc</span><span class="p">.</span><span class="n">score</span><span class="p">(</span><span class="n">test_scaled</span><span class="p">,</span> <span class="n">test_target</span><span class="p">))</span>
+
+<span class="n">sc</span> <span class="o">=</span> <span class="n">SGDClassifier</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span> <span class="s">"log"</span><span class="p">,</span> <span class="n">max_iter</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">tol</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="n">random_state</span> <span class="o">=</span> <span class="mi">42</span><span class="p">)</span>
+            <span class="c1"># logictic loss function   # epoch  # 반복을 멈출 조건  # random_seed
+</span><span class="n">sc</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_scaled</span><span class="p">,</span> <span class="n">train_target</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">sc</span><span class="p">.</span><span class="n">score</span><span class="p">(</span><span class="n">train_scaled</span><span class="p">,</span> <span class="n">train_target</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">sc</span><span class="p">.</span><span class="n">score</span><span class="p">(</span><span class="n">test_scaled</span><span class="p">,</span> <span class="n">test_target</span><span class="p">))</span>
+<span class="c1"># 0.957983193277311
+# 0.925
+</span></code></pre></div></div>
+<p><img src="data:image/png;base64,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" alt="조기종료" /></p>
+
+<pre>
+8. 점진적 학습을 위한 확률적 경사 하강법
+   : 확률적 경사 하강법은 손실 함수라는 산을 정의하고 가장 가파른 경사를 따라 조금씩 내려오는 알고리즘
+   : 훈련을 반복할수록 모델이 훈련 세트에 점점 더 잘 맞게 되어 어느순간 과대적합, 테스트의 정확도는 줄어들 것
+   : 하지만 데이터는 매우 크기 때문에, 조금씩 사용해 점진적으로 학습하는 방법이 필요
+</pre>
+
+:ET

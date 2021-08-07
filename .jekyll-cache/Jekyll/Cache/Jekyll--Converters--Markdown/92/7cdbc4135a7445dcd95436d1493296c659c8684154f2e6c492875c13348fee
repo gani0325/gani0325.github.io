@@ -1,0 +1,58 @@
+I"�
+<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">java 입문 수업(생활코딩) 수업을 참고하여 작성하였습니다</span></p>
+<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">JAVA_형변환</span></p>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>정의</title>
+</head>
+<body>
+
+<pre>
+</pre>
+
+<p><span style="background: linear-gradient(to right, #ffa7a3, #5673bd); padding: 0.43em 1em; font-size: 19px; border-radius: 3px; color: #ffffff;">형변환</span></p>
+
+<pre>
+1. 형 변환
+   - 형 변환(Type Conversion)이란 데이터의 타입을 변경하는 것
+   -  형식이 다른 데이터들을 더하려면 한쪽의 데이터 타입을 
+     다른 쪽의 데이터 타입으로 전환(Conversion)해야 한다
+   -  자바는 이러한 형 변환을 자동으로 처리해주는데
+     이러한 전환작업을 자동(암시적) 형 변환(implicit Conversion)이라고 부른다
+
+int 타입의 정수 200의 bit 값은 아래와 같다.
+00000000 00000000 00000000 11001000
+
+float 타입의 정수 200.0의 bit 값은 아래와 같다.
+01000011 01001000 00000000 00000000
+</pre>
+</body>
+</html>
+
+<pre>
+1) 자동 형 변환
+   - 아래의 코드는 double 타입의 변수 a에 
+    float 타입의 값을 대입하고 있다
+   - 이 때 3.0F의 값은 자동으로 double 타입으로 형 변환이 일어난다
+   - double 타입이 float 타입보다 더 많은 수를 
+    표현 할 수 있기 때문이다 
+   - 타입을 변경해도 정보의 손실이 일어나지 않는 경우
+    자동 형 변환이 일어난다
+
+   =&gt; 자동 형 변환의 원칙은 표현범위가 좁은 데이터 타입에서 
+   넓은 데이터 타입으로의 변환만 허용된다는 것이다
+</pre>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">3</span><span class="o">;</span>
+<span class="kt">float</span> <span class="n">b</span> <span class="o">=</span> <span class="mf">1.0</span><span class="no">F</span><span class="o">;</span>
+<span class="kt">double</span> <span class="n">c</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="o">;</span>
+<span class="c1">// 두 번의 형 변환이 일어난다</span>
+<span class="c1">// 우선 a와 b를 더하기 위해서 정수 a와 실수 b 중 하나가 형 변환</span>
+<span class="c1">// float가 double로 형 변환을 해야 한다</span>
+<span class="c1">// 최종적으로 형 변환된 값이 변수 c에 담겼다</span>
+</code></pre></div></div>
+
+<p><img src="https://s3.ap-northeast-2.amazonaws.com/opentutorials-user-file/module/516/1822.gif" /></p>
+:ET

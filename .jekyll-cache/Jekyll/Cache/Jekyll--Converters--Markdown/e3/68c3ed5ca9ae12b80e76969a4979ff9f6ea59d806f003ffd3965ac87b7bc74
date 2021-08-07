@@ -1,0 +1,107 @@
+I"�<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">java 입문 수업(생활코딩) 수업을 참고하여 작성하였습니다</span></p>
+<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">JAVA_숫자와 문자열-문자열</span></p>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>정의</title>
+</head>
+<body>
+
+<pre>
+</pre>
+
+<p><span style="background: linear-gradient(to right, #ffa7a3, #5673bd); padding: 0.43em 1em; font-size: 19px; border-radius: 3px; color: #ffffff;">숫자와 문자열-숫자</span></p>
+
+<pre>
+1. 문자와 문자열
+  - 자바는 문자(Character)와 문자열(String)을 구분
+  - 자바에서 문자는 '(작은따옴표)로 감싸야 한다
+  - 문자열은 "(큰따옴표)로 감싸야 한다
+  - 만약 문자열을 작은 따옴표로 감싸면 에러가 발생한다
+  - 하나의 문자를 큰따옴표로 감싼다고 에러가 발생하지는 않는다. 한 글자도 문자열이 될 수 있기 때문
+</pre>
+</body>
+</html>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">org.opentutorials.javatutorial</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CharString</span> <span class="o">{</span>
+
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"생활코딩"</span><span class="o">);</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="err">'</span><span class="n">생활코딩</span><span class="err">'</span><span class="o">);</span>
+	<span class="o">}</span>
+
+<span class="o">}</span>
+<span class="c1">// error Invalid character constant</span>
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">org.opentutorials.javatutorial</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CharString</span> <span class="o">{</span>
+
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"생활코딩"</span><span class="o">);</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"가은이"</span><span class="o">+</span><span class="s">"입니다"</span><span class="o">);</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"1"</span><span class="o">+</span><span class="s">"1"</span><span class="o">);</span>
+		
+	<span class="o">}</span>
+
+<span class="o">}</span>
+<span class="c1">// 생활코딩</span>
+<span class="c1">// 가은이입니다</span>
+<span class="c1">// 11</span>
+</code></pre></div></div>
+
+<pre>
+  2. 만약 문자열 안에 큰 따옴표를 넣고 싶다면 어떻게 해야 할까?
+  - \를 " 앞에 위치시키면 " 를 문자열의 시작과 끝을 구분하는 구분자가 아니라 단순히 문자로 해석하도록 강제
+  - escape(이스케이프) : 큰따옴표가 가진 문법적인 역할에서 도망(escape)쳐서 문자로 인식
+</pre>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">org.opentutorials.javatutorial</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CharString</span> <span class="o">{</span>
+
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"egoing said \"Welcome programming world\""</span><span class="o">);</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+<span class="c1">// egoing said "Welcome programming world"</span>
+</code></pre></div></div>
+
+<pre>
+  3. 여러 줄의 표시
+  - \n 표시!
+</pre>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">org.opentutorials.javatutorial</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CharString</span> <span class="o">{</span>
+
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"HTML\nCSS\nJavaScript\n"</span><span class="o">);</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+<span class="c1">// HTML</span>
+<span class="c1">// CSS</span>
+<span class="c1">// JavaScript</span>
+</code></pre></div></div>
+
+<pre>
+  4. 문자의 연산
+  - "~" + "~"
+</pre>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">org.opentutorials.javatutorial</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CharString</span> <span class="o">{</span>
+
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"가은"</span><span class="o">+</span><span class="s">"♥"</span><span class="o">+</span><span class="s">"태훈"</span><span class="o">);</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+<span class="c1">// 가은♥태훈</span>
+</code></pre></div></div>
+:ET
