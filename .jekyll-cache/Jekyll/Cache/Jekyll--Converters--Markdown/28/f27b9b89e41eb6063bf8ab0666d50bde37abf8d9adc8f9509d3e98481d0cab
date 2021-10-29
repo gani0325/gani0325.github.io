@@ -1,0 +1,94 @@
+I"�&<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">K 실전 알고리즘 강좌(Algorithm Programming Tutorial) 동빈나 님 수업을 참고하여 작성하였습니다</span></p>
+<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">8_병합 정렬(Merge Sort)</span></p>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>정의</title>
+</head>
+<body>
+
+<pre>
+</pre>
+
+<p><span style="background: linear-gradient(to right, #ffa7a3, #5673bd); padding: 0.43em 1em; font-size: 19px; border-radius: 3px; color: #ffffff;">병합 정렬(Merge Sort)</span></p>
+
+<pre>
+1. 병합 정렬(Merge Sort)
+	: 분할 정복 방법을 채택한 알고리즘
+	: 퀵 정렬과 동일한 시간 복잡도 가짐
+	: 퀵 정렬은 피벗 값에 따라 편향되게 분할됨
+	: 병합 정렬은 정확히 반절씩 나눈다는 점에서
+	최악의 경우에도 N*logN 보장
+	: 피벗 값이 없고 항상 반으로 나눈다
+	: 이 단계의 크기가 logN이 되도록 만들어줌
+	: 합치는 순간에 정렬 수행하기
+	: 너비가 N번, 높이가 logN
+</pre>
+</body>
+</html>
+
+<blockquote>
+  <p><strong>일단 반으로 나누고 나중에 합쳐서 정렬하면
+어떨까?</strong></p>
+</blockquote>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;stdio.h&gt;
+</span>
+<span class="kt">int</span> <span class="n">number</span> <span class="o">=</span> <span class="mi">8</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">sorted</span><span class="p">[</span><span class="mi">8</span><span class="p">];</span> <span class="c1">// 정렬 배열은 반드시 전역변수로 선언</span>
+
+<span class="kt">void</span> <span class="nf">merge</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">m</span><span class="p">,</span> <span class="kt">int</span> <span class="n">middle</span><span class="p">,</span> <span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+	<span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">m</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">middle</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="n">m</span><span class="p">;</span>
+	<span class="c1">// 작은 순서대로 배열에 삽입</span>
+	<span class="k">while</span> <span class="p">(</span><span class="n">i</span> <span class="o">&lt;=</span> <span class="n">middle</span> <span class="o">&amp;&amp;</span> <span class="n">j</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">)</span>  <span class="p">{</span>
+		<span class="k">if</span> <span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">a</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="p">{</span>
+			<span class="n">sorted</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+			<span class="n">i</span><span class="o">++</span><span class="p">;</span>
+		<span class="p">}</span>
+		<span class="k">else</span> <span class="p">{</span>
+			<span class="n">sorted</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+			<span class="n">j</span> <span class="o">++</span><span class="p">;</span>
+		<span class="p">}</span>
+		<span class="n">k</span><span class="o">++</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="c1">// 남은 데이터 삽입 </span>
+	<span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">&gt;</span> <span class="n">middle</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">t</span> <span class="o">=</span><span class="n">j</span><span class="p">;</span> <span class="n">t</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span><span class="n">t</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+			<span class="n">sorted</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">t</span><span class="p">];</span>
+			<span class="n">k</span><span class="o">++</span><span class="p">;</span>
+		<span class="p">}</span>
+	<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+		<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">t</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span> <span class="n">t</span> <span class="o">&lt;=</span> <span class="n">middle</span><span class="p">;</span> <span class="n">t</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+			<span class="n">sorted</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">t</span><span class="p">];</span>
+			<span class="n">k</span><span class="o">++</span><span class="p">;</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+	<span class="c1">// 정렬된 배열 삽입</span>
+	<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">t</span> <span class="o">=</span><span class="n">m</span><span class="p">;</span> <span class="n">t</span> <span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span> <span class="n">t</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">a</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">sorted</span><span class="p">[</span><span class="n">t</span><span class="p">];</span>
+	<span class="p">}</span> 
+<span class="p">}</span> 
+
+<span class="kt">void</span> <span class="nf">mergeSort</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">m</span><span class="p">,</span> <span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+	<span class="c1">// 크기가 1 보다 클 경우</span>
+	<span class="k">if</span> <span class="p">(</span><span class="n">m</span> <span class="o">&lt;</span><span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+		<span class="kt">int</span> <span class="n">middle</span> <span class="o">=</span> <span class="p">(</span><span class="n">m</span> <span class="o">+</span> <span class="n">n</span><span class="p">)</span> <span class="o">/</span><span class="mi">2</span><span class="p">;</span>
+		<span class="n">mergeSort</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">middle</span><span class="p">);</span>
+		<span class="n">mergeSort</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">middle</span> <span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">);</span>
+		<span class="n">merge</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">m</span> <span class="p">,</span><span class="n">middle</span><span class="p">,</span> <span class="n">n</span><span class="p">);</span>
+	<span class="p">}</span> 
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+	<span class="kt">int</span> <span class="n">array</span><span class="p">[</span><span class="n">number</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">7</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">1</span><span class="p">};</span>
+	<span class="n">mergeSort</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">number</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+	<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">number</span><span class="p">;</span> <span class="n">i</span> <span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">printf</span><span class="p">(</span><span class="s">"%d "</span><span class="p">,</span> <span class="n">array</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+<span class="c1">// 1 3 5 5 6 7 8 9</span>
+</code></pre></div></div>
+:ET

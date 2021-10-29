@@ -1,0 +1,92 @@
+I"�3<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">K 실전 알고리즘 강좌(Algorithm Programming Tutorial) 동빈나 님 수업을 참고하여 작성하였습니다</span></p>
+<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">9_C++ STL sort() 함수 다루기 ②</span></p>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>정의</title>
+</head>
+<body>
+
+<pre>
+</pre>
+
+<p><span style="background: linear-gradient(to right, #ffa7a3, #5673bd); padding: 0.43em 1em; font-size: 19px; border-radius: 3px; color: #ffffff;">C++ STL sort() 함수 다루기 ②</span></p>
+
+<pre>
+1. sort() 함수의 기본 사용법
+	: 빠른 개발이 필요할 때는 페어(Pair) 라이브러리 사용
+</pre>
+</body>
+</html>
+
+<blockquote>
+  <p><strong>1) vector 와 페어 이용(숏코딩)</strong></p>
+</blockquote>
+<pre>
+	- vecotr : 단순한 배열을 보다 사용하기 쉽게 개편한 자료주고
+	- pair : 한 쌍의 데이터를 처리할 수 있게함
+</pre>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;algorithm&gt;
+</span>
+<span class="n">using</span> <span class="n">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+	<span class="n">vector</span><span class="o">&lt;</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="n">string</span><span class="o">&gt;</span> <span class="o">&gt;</span><span class="n">v</span><span class="p">;</span>
+	<span class="n">v</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">90</span><span class="p">,</span> <span class="s">"이가은"</span><span class="p">));</span>
+	<span class="n">v</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">88</span><span class="p">,</span> <span class="s">"권태훈"</span><span class="p">));</span>
+	<span class="n">v</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">96</span><span class="p">,</span> <span class="s">"전정국"</span><span class="p">));</span>
+	<span class="n">v</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">94</span><span class="p">,</span> <span class="s">"김남준"</span><span class="p">));</span>
+	<span class="n">v</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">67</span><span class="p">,</span> <span class="s">"김태형"</span><span class="p">));</span> 
+	
+	<span class="n">sort</span><span class="p">(</span><span class="n">v</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">v</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+	<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span> <span class="n">v</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">second</span> <span class="o">&lt;&lt;</span> <span class="s">" "</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// 김태형 권태훈 이가은 김남준 전정국</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p><strong>1) \이름, 성적, 생년월일 주어질 때
+성적 동일할 경우 나이가 더어린 학생이 순위 더높음</strong></p>
+</blockquote>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;algorithm&gt;
+</span>
+<span class="n">using</span> <span class="n">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="n">bool</span> <span class="nf">compare</span> <span class="p">(</span><span class="n">pair</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span> <span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="o">&gt;</span> <span class="n">a</span><span class="p">,</span>
+			  <span class="n">pair</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span> <span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="o">&gt;</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">if</span> <span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">second</span><span class="p">.</span><span class="n">first</span> <span class="o">==</span> <span class="n">b</span><span class="p">.</span><span class="n">second</span><span class="p">.</span><span class="n">first</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="n">a</span><span class="p">.</span><span class="n">second</span><span class="p">.</span><span class="n">second</span> <span class="o">&gt;</span> <span class="n">b</span><span class="p">.</span><span class="n">second</span><span class="p">.</span><span class="n">second</span><span class="p">;</span>
+	<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="n">a</span><span class="p">.</span><span class="n">second</span><span class="p">.</span><span class="n">first</span> <span class="o">&gt;</span> <span class="n">b</span><span class="p">.</span><span class="n">second</span><span class="p">.</span><span class="n">first</span><span class="p">;</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+	<span class="n">vector</span><span class="o">&lt;</span><span class="n">pair</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span> <span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="o">&gt;</span> <span class="o">&gt;</span><span class="n">v</span><span class="p">;</span>
+	<span class="n">v</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">pair</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span> <span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="o">&gt;</span><span class="p">(</span><span class="s">"이가은"</span><span class="p">,</span> <span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">90</span><span class="p">,</span> <span class="mi">20000325</span><span class="p">)));</span>
+	<span class="n">v</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">pair</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span> <span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="o">&gt;</span><span class="p">(</span><span class="s">"권태훈"</span><span class="p">,</span> <span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">96</span><span class="p">,</span> <span class="mi">19951116</span><span class="p">)));</span>
+	<span class="n">v</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">pair</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span> <span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="o">&gt;</span><span class="p">(</span><span class="s">"전정국"</span><span class="p">,</span> <span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">96</span><span class="p">,</span> <span class="mi">19970901</span><span class="p">)));</span>
+	<span class="n">v</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">pair</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span> <span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="o">&gt;</span><span class="p">(</span><span class="s">"김남준"</span><span class="p">,</span> <span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">94</span><span class="p">,</span> <span class="mi">19940912</span><span class="p">)));</span>
+	<span class="n">v</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">pair</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span> <span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="o">&gt;</span><span class="p">(</span><span class="s">"김태형"</span><span class="p">,</span> <span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">92</span><span class="p">,</span> <span class="mi">19951230</span><span class="p">)));</span>
+	
+	<span class="n">sort</span><span class="p">(</span><span class="n">v</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">v</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="n">compare</span><span class="p">);</span>
+	<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span> <span class="n">v</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">first</span> <span class="o">&lt;&lt;</span> <span class="s">" "</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// 전정국 권태훈 김남준 김태형 이가은</span>
+</code></pre></div></div>
+:ET

@@ -1,0 +1,105 @@
+I"�&<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">K 실전 알고리즘 강좌(Algorithm Programming Tutorial) 동빈나 님 수업을 참고하여 작성하였습니다</span></p>
+<p><span style="border-bottom: 12px solid #dcf1fb; padding: 0 0 0 0.2em;">9_C++ STL sort() 함수 다루기 ①</span></p>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>정의</title>
+</head>
+<body>
+
+<pre>
+</pre>
+
+<p><span style="background: linear-gradient(to right, #ffa7a3, #5673bd); padding: 0.43em 1em; font-size: 19px; border-radius: 3px; color: #ffffff;">C++ STL sort() 함수 다루기 ①</span></p>
+
+<pre>
+1. sort() 함수의 기본 사용법
+	: 오름차순 정렬
+	: sort(배열의 시작점 주소, 마지막 주소 +1)
+</pre>
+</body>
+</html>
+
+<blockquote>
+  <p><strong>1) sort() 함수</strong></p>
+</blockquote>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+</span>
+<span class="n">using</span> <span class="n">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span> <span class="p">){</span>
+	<span class="kt">int</span> <span class="n">a</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span> <span class="mi">2</span><span class="p">};</span>
+	<span class="n">sort</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">a</span><span class="o">+</span><span class="mi">10</span><span class="p">);</span>
+	<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="sc">' '</span><span class="p">;</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+<span class="c1">// 1 2 3 4 5 6 7 8 9 10</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p><strong>2) compare() 함수</strong></p>
+</blockquote>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+</span>
+<span class="n">using</span> <span class="n">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="n">bool</span> <span class="nf">compare</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span><span class="p">;</span> <span class="c1">// 내림차순 </span>
+	<span class="k">return</span> <span class="n">a</span> <span class="o">&lt;</span> <span class="n">b</span><span class="p">;</span> <span class="c1">// 오름차순 </span>
+<span class="p">}</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span> <span class="p">){</span>
+	<span class="kt">int</span> <span class="n">a</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span> <span class="mi">2</span><span class="p">};</span>
+	<span class="n">sort</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">a</span><span class="o">+</span><span class="mi">10</span><span class="p">,</span> <span class="n">compare</span><span class="p">);</span>
+	<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="sc">' '</span><span class="p">;</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+<span class="c1">// 1 2 3 4 5 6 7 8 9 10</span>
+<span class="c1">// 10 9 8 7 6 5 4 3 2 1</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p><strong>3) 특정한 변수를 기준으로 정렬(데이터 묶어서 정렬)</strong></p>
+</blockquote>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+</span>
+<span class="n">using</span> <span class="n">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="n">class</span> <span class="n">Student</span> <span class="p">{</span>
+<span class="n">public</span> <span class="o">:</span>
+	<span class="n">string</span> <span class="n">name</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="n">score</span><span class="p">;</span>
+	<span class="n">Student</span><span class="p">(</span><span class="n">string</span> <span class="n">name</span><span class="p">,</span> <span class="kt">int</span> <span class="n">score</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">this</span><span class="o">-&gt;</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span><span class="p">;</span>
+		<span class="n">this</span><span class="o">-&gt;</span><span class="n">score</span> <span class="o">=</span> <span class="n">score</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="c1">// 정렬 기준은 점수가 작은 순서</span>
+	<span class="n">bool</span> <span class="n">operator</span> <span class="o">&lt;</span> <span class="p">(</span><span class="n">Student</span> <span class="o">&amp;</span> <span class="n">student</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="n">this</span><span class="o">-&gt;</span><span class="n">score</span> <span class="o">&lt;</span> <span class="n">student</span><span class="p">.</span><span class="n">score</span><span class="p">;</span>
+	<span class="p">}</span>
+<span class="p">};</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+	<span class="n">Student</span> <span class="n">student</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span>
+		<span class="n">Student</span><span class="p">(</span><span class="s">"이가은"</span><span class="p">,</span> <span class="mi">90</span><span class="p">),</span>
+		<span class="n">Student</span><span class="p">(</span><span class="s">"권태훈"</span><span class="p">,</span> <span class="mi">99</span><span class="p">),</span>
+		<span class="n">Student</span><span class="p">(</span><span class="s">"전정국"</span><span class="p">,</span> <span class="mi">95</span><span class="p">),</span>
+		<span class="n">Student</span><span class="p">(</span><span class="s">"김석진"</span><span class="p">,</span> <span class="mi">97</span><span class="p">),</span>
+		<span class="n">Student</span><span class="p">(</span><span class="s">"민윤기"</span><span class="p">,</span> <span class="mi">92</span><span class="p">)</span> 
+		<span class="p">};</span>
+		<span class="n">sort</span><span class="p">(</span><span class="n">student</span><span class="p">,</span> <span class="n">student</span> <span class="o">+</span> <span class="mi">5</span><span class="p">);</span>
+		<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">;</span> <span class="n">i</span> <span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+			<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">student</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">name</span> <span class="o">&lt;&lt;</span> <span class="s">" "</span><span class="p">;</span>
+		<span class="p">}</span>	 
+<span class="p">}</span>
+<span class="c1">// 이가은 민윤기 전정국 김석진 권태훈</span>
+</code></pre></div></div>
+:ET
